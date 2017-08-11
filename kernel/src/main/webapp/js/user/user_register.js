@@ -33,7 +33,6 @@ $(document).ready(function() {
 			var isQuery = $(this).attr("pass")=="false"?false:true;	//是否查询
 			
 			if(isQuery){	
-				alert("query");
 				$.ajax({
 					type : "post",
 					url : "user/checklogin.do",
