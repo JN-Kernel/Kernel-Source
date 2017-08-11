@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aode.dao.PermissionMapper">
+	<insert id="createPermission" parameterType="com.aode.dto.Permission">
+		<!-- 获取插入后的主键 -->
+		<selectKey keyProperty="id" resultType='java.lang.Integer'
+			order='AFTER'>
+			SELECT LAST_INSERT_ID();
+		</selectKey>
+		INSERT INTO permission(permissionname,description)
+		VALUE (#{permissionName},#{description})
+	</insert>
+
+	<update id="updatePermission" parameterType="com.aode.dto.Permission">
+		UPDATE permission
+		<set>
+			<if test="permissionName != null">
+				permissionname = #{permissionName},
+			</if>
+			<if test="description != null">
+				description = #{description},
+			</if>
+		</set>
+		WHERE permission_id = #{id}
+	</update>
+
+	<delete id="deleteRoleByRoleId" parameterType="java.lang.Integer">
+		DELETE
+		FROM permission
+		WHERE permission_id=#{id}
+	</delete>
+
+</mapper>

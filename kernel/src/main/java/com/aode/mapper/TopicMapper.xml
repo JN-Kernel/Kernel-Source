@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aode.dao.TopicMapper">
+	<select id="getLatestTopicOfTitleAndId"  resultType="com.aode.dto.Topic">
+		SELECT topic_id,title,publishtime,likecount
+		FROM topic 
+		ORDER BY publishtime DESC 
+	</select>
+	
+	<select id="searchTopicOfTitleAndId" parameterType="java.lang.String" resultType="com.aode.dto.Topic">
+		SELECT topic_id,title,publishtime,likecount
+		FROM topic 
+		WHERE title
+		LIKE CONCAT("%",#{param},"%")
+		ORDER BY publishtime DESC 
+	</select>
+	
+	<select id="getLikeTopicOfTitleAndId" resultType="com.aode.dto.Topic">
+		SELECT topic_id,title,publishtime,likecount
+		FROM topic 
+		ORDER BY likecount DESC 
+	</select>
+	
+	<select id="getTopicById" parameterType="java.lang.Integer" resultType="com.aode.dto.Topic">
+		SELECT * 
+		FROM topic 
+		WHERE topic_id=#{topicId}
+	</select>
+	
+	<select id="getTopicContentByTopicId" parameterType="java.lang.Integer" resultType="com.aode.dto.TopicCustomize">
+		SELECT topic.*,topic_content.* 
+		FROM topic 
+		INNER JOIN topic_content 
+		ON topic.topic_id=topic_content.topic_id
+		AND  topic.topic_id =#{topicId}
+	</select>
+	
+	<select id="getTopicOfTitleAndIdByCatoreyId" parameterType="java.lang.Integer" resultType="com.aode.dto.Topic">
+		SELECT topic_id,title,publishtime,likecount,catorey_id
+		FROM topic 
+		WHERE catorey_id =#{catoreyId}
+		ORDER BY publishtime DESC 
+	</select>
+</mapper>

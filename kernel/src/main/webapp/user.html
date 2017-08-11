@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zn">
+<head>
+<title></title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="">
+
+<link rel="shortcut icon" href="images/icons/favicon.ico">
+<!--Loading bootstrap css-->
+<link type="text/css" rel="stylesheet"
+	href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
+<link type="text/css" rel="stylesheet"
+	href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
+<link type="text/css" rel="stylesheet"
+	href="css/styles/font-awesome.min.css">
+<link type="text/css" rel="stylesheet" href="css/user/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="css/styles/main.css">
+<link type="text/css" rel="stylesheet"
+	href="css/styles/jplist-custom.css">
+</head>
+<body>
+	<div>
+		<!--BEGIN BACK TO TOP-->
+		<a id="totop" href="#"><i class="fa fa-angle-up"></i></a>
+		<!--END BACK TO TOP-->
+		<!--BEGIN TOPBAR-->
+		<div id="header-topbar-option-demo" class="page-header-topbar">
+			<nav id="topbar" role="navigation" style="margin-bottom: 0;"
+				data-step="3" class="navbar navbar-default navbar-static-top">
+				<div class="navbar-header">
+
+					<a id="logo" href="index.html" class="navbar-brand"><span
+						class="fa fa-rocket"></span><span class="logo-text">KernelBase</span><span
+						style="display: none" class="logo-text-icon">µ</span></a>
+				</div>
+				<div class="topbar-main">
+
+					<form id="topbar-search" action="" method=""
+						class="hidden-sm hidden-xs">
+						<div class="input-icon right text-white">
+							<a href="#"><i class="glyphicon glyphicon-search"></i></a><input
+								type="text" placeholder="Search here..."
+								class="form-control text-white" />
+						</div>
+					</form>
+					<!--任务栏-->
+					<ul class="nav navbar navbar-top-links navbar-right mbn">
+
+						<li class="dropdown topbar-user"><a data-hover="dropdown"
+							href="#" class="dropdown-toggle"> <img
+								src="images/avatar/48.jpg" alt=""
+								class="img-responsive img-circle" />&nbsp;<span
+								class="hidden-xs">Robert John</span>&nbsp;<span class="caret"></span>
+						</a>
+							<ul class="dropdown-menu dropdown-user pull-right">
+								<li><a href="user_info.html"><i
+										class="glyphicon glyphicon-user"></i>我的信息</a></li>
+								<li><a href="user_publish.html"><i
+										class="glyphicon glyphicon-pencil"></i>发表主题</a></li>
+								<li><a href="user.html"><i
+										class="glyphicon glyphicon-cloud"></i>已发表文章</a></li>
+								<li class="divider"></li>
+								<li><a href="Login.html"><i
+										class="glyphicon glyphicon-log-out"></i>退出</a></li>
+							</ul></li>
+
+					</ul>
+				</div>
+			</nav>
+		</div>
+		<!--END TOPBAR-->
+	</div>
+
+	<nav id="sidebar" role="navigation" data-step="2"
+		data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;"
+		data-position="right" class="navbar-default navbar-static-side">
+		<div class="sidebar-collapse menu-scroll">
+			<ul id="side-menu" class="nav">
+
+				<div class="clearfix"></div>
+				<li><a href="user_info.html"><i
+						class="fa fa-tachometer fa-fw">
+							<div class="icon-bg bg-orange"></div>
+					</i><span class="menu-title">我的信息</span></a></li>
+				<li><a href="user_account.html"><i
+						class="fa fa-desktop fa-fw">
+							<div class="icon-bg bg-pink"></div>
+					</i><span class="menu-title">账户管理</span></a></li>
+				<li><a href="user_publish.html"><i
+						class="fa fa-send-o fa-fw">
+							<div class="icon-bg bg-green"></div>
+					</i><span class="menu-title">发表主题</span></a></li>
+				<li><a href="user.html"><i class="fa fa-send-o fa-fw">
+							<div class="icon-bg bg-green"></div>
+					</i><span class="menu-title">已发表文章</span></a></li>
+				<li><a href="user_comment.html"><i
+						class="fa fa-send-o fa-fw">
+							<div class="icon-bg bg-green"></div>
+					</i><span class="menu-title">文章评论</span></a></li>
+
+
+			</ul>
+		</div>
+	</nav>
+
+	<div class="row">
+		<div class="col-lg-10 pull-right">
+			<div class="panel">
+				<div class="panel-body">
+					<div id="grid-layout-table-1" class="box jplist">
+						<!--文章-->
+						<div class="box text-shadow">
+							<table class="demo-tbl">
+								<!--<item>1</item>-->
+								<tr class="tbl-item">
+									<!--<img/>-->
+
+									<!--<data></data>-->
+									<td class="td-block"><p class="date">03/15/2012</p>
+
+										<p class="title">Arch</p>
+
+										<p class="desc">An arch is a structure that spans a space
+											and supports a load. Arches appeared as early as the 2nd
+											millennium BC in Mesopotamian brick architecture and their
+											systematic use started with the Ancient Romans who were the
+											first to apply the technique to a wide range of structures.</p>
+
+										<p class="like">5 Likes</p></td>
+								</tr>
+
+							</table>
+						</div>
+						<!--文章结束-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+	<!--BEGIN FOOTER-->
+	<div id="footer">
+		<div class="copyright">
+			<a href="#">Copyright © 2017. All Rights Reserved by
+				KnowledgeBase.</a>
+		</div>
+	</div>
+	<!--END FOOTER-->
+
+
+
+
+	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap-hover-dropdown.js"></script>
+	<script src="js/index.js"></script>
+
+
+
+
+</body>
+
+
+
+</html>

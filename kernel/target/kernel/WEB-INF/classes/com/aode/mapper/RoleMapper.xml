@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aode.dao.RoleMapper">
+	<insert id="createRole" parameterType="com.aode.dto.Role">
+		<!-- 获取插入后的主键 -->
+		<selectKey keyProperty="id" resultType='java.lang.Integer'
+			order='AFTER'>
+			SELECT LAST_INSERT_ID();
+		</selectKey>
+		INSERT INTO role (rolename,description)
+		VALUE (#{roleName},#{description})
+	</insert>
+
+	<update id="updateRole" parameterType="com.aode.dto.Role">
+		UPDATE role
+		<set>
+			<if test="rolename != null">
+				rolename = #{rolename},
+			</if>
+			<if test="description != null">
+				description = #{description},
+			</if>
+		</set>
+		WHERE role_id = #{id}
+	</update>
+
+	<delete id="deleteRoleByRoleId" parameterType="java.lang.Integer">
+		DELETE
+		FROM role
+		WHERE role_id=#{id}
+	</delete>
+
+
+	<insert id="correlationPermissions" parameterType="com.aode.dto.RolePermission">
+		INSERT INTO role_permission (role_id,permission_id) 
+		VALUES
+		<foreach collection="permissionIds" item="item" separator=",">
+			(#{userId},#{item})
+		</foreach>
+	</insert>
+	
+	<delete id="uncorrelationPermissions" parameterType="com.aode.dto.RolePermission">
+		DELETE FROM role_permission
+		WHERE role_id = #{userId}
+		AND permission_id in
+		<foreach collection="permissionIds" item="item" open="(" separator=","
+			close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

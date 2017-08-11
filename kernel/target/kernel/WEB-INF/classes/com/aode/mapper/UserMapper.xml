@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.aode.dao.UserMapper">
+
+	<sql id="Base_User">
+		user_id,username,password,email,phone,creattime
+	</sql>
+
+	<select id="getRoles" resultType="java.lang.String"
+		parameterType="java.lang.String">
+		SELECT rolename
+		FROM user,role,user_role
+		WHERE
+		user.user_id = user_role.user_id AND user_role.role_id = role.role_id
+		AND user.username = #{username}
+	</select>
+
+
+	<select id="getPermissions" resultType="java.lang.String"
+		parameterType="java.lang.String">
+		SELECT permissionname
+		FROM user,user_role,permission,role_permission
+		WHERE user.user_id = user_role.user_id
+		AND user_role.role_id = role_permission.role_id
+		AND
+		role_permission.permission_id = permission.permission_id
+		AND
+		user.username = #{username}
+	</select>
+
+	<select id="getByUsername" parameterType="java.lang.String"
+		resultType="com.aode.dto.User">
+		SELECT
+		<include refid="Base_User" />
+		FROM user WHERE username = #{username}
+	</select>
+
+	<select id="getByPhone" parameterType="java.lang.String"
+		resultType="com.aode.dto.User">
+		SELECT
+		<include refid="Base_User" />
+		FROM user WHERE phone = #{phone}
+	</select>
+
+	<select id="getByEmail" parameterType="java.lang.String"
+		resultType="com.aode.dto.User">
+		SELECT
+		<include refid="Base_User" />
+		FROM user WHERE email = #{email}
+	</select>
+
+	<select id="getById" parameterType="java.lang.Integer"
+		resultType="com.aode.dto.User">
+		SELECT
+		<include refid="Base_User" />
+		FROM user WHERE user_id = #{id}
+	</select>
+
+
+	<delete id="deleteByUserId" parameterType="java.lang.Integer">
+		DELETE FROM user
+		WHERE
+		user_id = #{userId};
+	</delete>
+
+
+	<insert id="creatUser" parameterType="com.aode.dto.User">
+		<!-- 获取插入后的主键 -->
+		<selectKey keyProperty="id" resultType='java.lang.Integer'
+			order='AFTER'>
+			SELECT LAST_INSERT_ID();
+		</selectKey>
+		INSERT INTO user (username,password,phone,email,creattime)
+		VALUE
+		(#{username},#{password},#{phone},#{email},#{creattime})
+	</insert>
+
+	<insert id="correlationRoles" parameterType="com.aode.dto.UserRole">
+		INSERT INTO user_role (user_id,role_id)
+		VALUES
+		<foreach collection="roleIds" item="item" separator=",">
+			(#{userId},#{item})
+		</foreach>
+
+	</insert>
+
+	<delete id="uncorrelationRoles" parameterType="com.aode.dto.UserRole">
+		DELETE FROM user_role
+		WHERE user_id = #{userId}
+		AND role_id in
+		<foreach collection="roleIds" item="item" open="(" separator=","
+			close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+
+	<update id="changePassword" parameterType="com.aode.dto.User">
+		UPDATE user 
+		SET password=#{password}
+		WHERE username=#{username}
+	</update>
+</mapper>
