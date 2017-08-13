@@ -147,8 +147,11 @@ public class UserController {
 					//注册处理
 					//数据检验
 					String[] items = {"username","email","phone","password"};
+					System.out.println(Arrays.asList(items));
 					try {
+						System.out.println("checkUser before");
 						Map<String,Boolean> result = UserUtils.checkUser(user, Arrays.asList(items));
+						System.out.println("checkUser after");
 						if(result == null || result.isEmpty()){
 							msg.put("msg", "异常注册！");
 							msg.put("stauts", "error");
@@ -159,6 +162,7 @@ public class UserController {
 							while(iterator.hasNext()){
 								String checkeditem = iterator.next();
 								Boolean resultBoolean = result.get(checkeditem);
+								System.out.println("checkeditem: "+checkeditem+"  resultBoolean: "+resultBoolean);
 								if(!resultBoolean){
 									msg.put("msg", checkeditem+"错误，请重试");
 									msg.put("stauts", "error");
@@ -170,9 +174,8 @@ public class UserController {
 								String isRegisterResult = UserUtils.checkIsRegister(userService, user);
 								if(isRegisterResult == null){
 									user.setCreattime(new Date());
-									Integer userId = userService.creatUser(user);
-									if(userId != null){
-										user.setUserId(userId);
+									Integer creatResult = userService.creatUser(user);
+									if(creatResult != null){
 										msg.put("msg", "注册成功，请牢记您的帐号和密码！");
 										msg.put("stauts", "success");
 									}
@@ -196,8 +199,8 @@ public class UserController {
 				msg.put("stauts", "error");
 			}
 		}
-		
-		return null;
+		System.out.println(msg.toString());
+		return msg;
 		
 	}
 	

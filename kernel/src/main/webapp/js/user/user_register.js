@@ -71,43 +71,46 @@ $(document).ready(function() {
 	//数据提交
 	$("#“register”").click(function(){
 		
+		var flag = true;	//判断是否继续执行注册操作
 		$(validateItems).each(function(){
 			var pass = $(this).attr("pass");
 			var str = $(this).val();
-			
 			if(str == "" || str == null || pass == "false" ){
+				flag = false
 				$(this).keyup();	//检验
-			}else{
-				//注册
-				$.ajax({
-					type : "post",
-					url : "user/register.do",
-					data : $("#register").serialize(),
-					dataType:"json",
-					success : function(data) {
-						
-						if(data.stauts == "erroe"){
-							alertbox.attr("class","alert alert-danger");
-						}else if(data.stauts == "success"){
-							alertbox.attr("class","alert alert-success");
-							
-							 setTimeout(function () {
-								 $(window).attr('location',document.referrer);
-							    }, 1500);
-						}else{
-							alertbox.attr("class","alert alert-warning");
-						}
-						
-						alertbox.text(data.msg);
-						alertbox.show(500);
-					},
-					error : function(xhr) {
-						alert("获取注册信息失败！代码： " + xhr.status + " " + xhr.statusText);
-					}
-				});
-				
 			}
 		});
+		
+		if(flag){
+			//注册
+			$.ajax({
+				type : "post",
+				url : "user/register.do",
+				data : $("#register_from").serialize(),
+				dataType:"json",
+				success : function(data) {
+					
+					if(data.stauts == "erroe"){
+						alertbox.attr("class","alert alert-danger");
+					}else if(data.stauts == "success"){
+						alertbox.attr("class","alert alert-success");
+						var refurl = document.referrer;
+				
+						 setTimeout(function () {
+							 $(window).attr('location',"login.html");
+						    }, 1500);
+					}else{
+						alertbox.attr("class","alert alert-warning");
+					}
+					
+					alertbox.text(data.msg);
+					alertbox.show(500);
+				},
+				error : function(xhr) {
+					alert("获取注册信息失败！代码： " + xhr.status + " " + xhr.statusText);
+				}
+			});
+		}
 	});
 	
 	//获取验证码
@@ -126,6 +129,8 @@ $(document).ready(function() {
 					$("#getVerificationCode").tooltip("show");
 					if(data.stauts == "success"){		
 						countDown(60);
+					}else{
+						$("#getVerificationCode").removeClass("disabled");
 					}
 				},
 				error : function(xhr) {

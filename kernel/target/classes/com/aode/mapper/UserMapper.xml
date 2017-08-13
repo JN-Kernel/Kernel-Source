@@ -86,7 +86,7 @@
 
 	<insert id="creatUser" parameterType="com.aode.dto.User">
 		<!-- 获取插入后的主键 -->
-		<selectKey keyProperty="id" resultType='java.lang.Integer'
+		<selectKey keyProperty="userId" resultType='java.lang.Integer'
 			order='AFTER'>
 			SELECT LAST_INSERT_ID();
 		</selectKey>

@@ -1,8 +1,6 @@
 $("#submit").click(function() {
 	$("#alert").hide();
 	var alertbox = $("#alert");
-	alert("login");
-	alert($("#loginfrom").serialize());
 	$.ajax({
 		type : "post",
 		url : "user/login.do",
