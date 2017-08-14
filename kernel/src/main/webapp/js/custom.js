@@ -294,7 +294,7 @@ jQuery(document).ready(function(e) {
                 /*-----------------------------------------------------------------------------------*/
                 var $mainNav    = $('.main-nav > div').children('ul');
                 var optionsList = '<option value="" selected>Go to...</option>';
-
+alert("cum");
                 $mainNav.find('li').each(function() {
                         var $this   = $(this),
                                 $anchor = $this.children('a'),

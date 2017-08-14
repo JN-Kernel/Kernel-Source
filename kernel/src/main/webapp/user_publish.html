@@ -108,36 +108,20 @@
 	</nav>
 
 	<div class="row">
-		<div class="col-lg-10 pull-right">
+		<div class="col-sm-10">
 			<div class="panel">
-				<div class="panel-body">
-					<div id="grid-layout-table-1" class="box jplist">
-						<!--文章-->
-						<div class="box text-shadow">
-							<table class="demo-tbl">
-								<!--<item>1</item>-->
-								<tr class="tbl-item">
-									<!--<img/>-->
-
-									<!--<data></data>-->
-									<td class="td-block"><p class="date">03/15/2012</p>
-
-										<p class="title">Arch</p>
-
-										<p class="desc">An arch is a structure that spans a space
-											and supports a load. Arches appeared as early as the 2nd
-											millennium BC in Mesopotamian brick architecture and their
-											systematic use started with the Ancient Romans who were the
-											first to apply the technique to a wide range of structures.</p>
-
-										<p class="like">5 Likes</p></td>
-								</tr>
-
-							</table>
-						</div>
-						<!--文章结束-->
-					</div>
-				</div>
+				
+					
+						
+							 <form action="server.php" method="post">
+        						<!-- 加载编辑器的容器 -->
+        						<script id="container" name="content" type="text/plain">
+            					这里写你的初始化内容
+        						</script>
+    						</form>
+				
+					
+				
 			</div>
 		</div>
 	</div>
@@ -162,7 +146,23 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/bootstrap-hover-dropdown.js"></script>
 	<script src="js/index.js"></script>
-
+	
+	<!-- ueditor -->
+	 <!-- 配置文件 -->
+    <script type="text/javascript" src="ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="ueditor/ueditor.all.js"></script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var editor = UE.getEditor('container',{
+        	 toolbars: [
+        	        ['fullscreen','source', 'bold','italic','underline','forecolor','strikethrough', 'undo','redo', 'insertorderedlist', 'insertunorderedlist', 'preview'],
+        	        [ 'indent', 'justifyleft', 'justifyright', 'justifycenter', 'justifyjustify', 'link', 'unlink', 'inserttable', 'blockquote','formatmatch','searchreplace', 'insertcode']
+        	    ],
+        	    autoHeightEnabled:false,
+        	    toolbarTopOffset:800
+        });
+    </script>
 
 
 

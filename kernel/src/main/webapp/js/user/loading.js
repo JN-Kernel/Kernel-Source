@@ -30,6 +30,37 @@ $(function() {
 		searchTopic(pageNum);
 	});
 	
+	
+	
+	
+	
+	 /*	响应式菜单，copy by custom.js
+    /*-----------------------------------------------------------------------------------*/
+    var $mainNav    = $('.main-nav > div').children('ul');
+    var optionsList = '<option value="" selected>Go to...</option>';
+    
+    $mainNav.find('li').each(function() {
+            var $this   = $(this),
+                    $anchor = $this.children('a'),
+                    depth   = $this.parents('ul').length - 1,
+                    indent  = '';
+            if( depth ) {
+                    while( depth > 0 ) {
+                            indent += ' - ';
+                            depth--;
+                    }
+            }
+            optionsList += '<option value="' + $anchor.attr('href') + '">' + indent + ' ' + $anchor.text() + '</option>';
+    }).end();
+
+    $('.main-nav > div').after('<select class="responsive-nav">' + optionsList + '</select>');
+
+    $('.responsive-nav').on('change', function() {
+            window.location = $(this).val();
+    });
+	
+	
+	
 });
 
 function getIndexData(){
