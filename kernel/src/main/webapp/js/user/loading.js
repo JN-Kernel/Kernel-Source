@@ -34,9 +34,9 @@ $(function() {
 
 function getIndexData(){
 	// 主页数据加载
-	getData("getLatestTopicList.do", $("#latestTopicList"),
+	getData("index/getLatestTopicList.do", $("#latestTopicList"),
 			$("#latestTopicLoading"));
-	getData("getLikeTopicList.do", $("#LikeTopicList"), $("#LikeTopicLoading"));
+	getData("index/getLikeTopicList.do", $("#LikeTopicList"), $("#LikeTopicLoading"));
 }
 
 function getData(toUrl, obj, removeObj) {
@@ -80,7 +80,7 @@ function getData(toUrl, obj, removeObj) {
 function searchTopic(pageNum){
 	$.ajax({
 		type : "post",
-		url : "search.do",
+		url : "index/search.do",
 		data : $("#searchForm").serialize()+"&pageNum="+pageNum,
 		dataType : "json",
 		success : function(data, stauts) {

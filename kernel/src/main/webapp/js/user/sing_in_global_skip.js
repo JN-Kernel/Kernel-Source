@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$.post("user/isLogined.do",function(data,stauts){
+	$.post("user/isAccessWithLogined.do",function(data,stauts){
 		var url = document.referrer;
 		url = url == ""?"index.html":url;
 		if(stauts == "success"){

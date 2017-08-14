@@ -13,9 +13,27 @@
 	<!-- 自定义Realm -->
 	<bean id="myRealm" class="com.aode.shiro.realm.MyRealm" />
 
+	<!-- 自定义filter，起在rememberme session失效情况下刷新session作用 -->
+	<bean id="userSettingFilter" class="com.aode.shiro.filter.UserSettingFilter" />
+
+	<!-- remenberMe配置 -->
+	<bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+		<constructor-arg value="rememberMe" />
+		<property name="httpOnly" value="true" />
+		<!-- 默认记住7天（单位：秒） -->
+		<property name="maxAge" value="604800" />
+	</bean>
+	<!-- rememberMe管理器 -->
+	<bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+		<property name="cipherKey"
+			value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}" />
+		<property name="cookie" ref="rememberMeCookie" />
+	</bean>
+
 	<!-- 安全管理器 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="myRealm" />
+		<property name="rememberMeManager" ref="rememberMeManager" />
 	</bean>
 
 
@@ -28,24 +46,34 @@
 		<property name="loginUrl" value="/login.html" />
 		<!-- 权限认证失败，则跳转到指定页面 -->
 		<property name="unauthorizedUrl" value="/unauthorized.jsp" />
+
+		<property name="filters">
+			<map>
+				<entry key="userSetting" value-ref="userSettingFilter" />
+			</map>
+		</property>
 		
 		<!-- Shiro连接约束配置,即过滤链的定义 -->
 		<property name="filterChainDefinitions">
 			<value>
-				/login=anon
-				/user/checklogin=anon
-				/user/login=anon
-				/user/isLogined=anon
-				
+				/login.do=anon
 				/user/logout.do=logout
+
+				/user/**=anon
+				/index/**=anon,userSetting
 				
+				/user*=user
 				/user/admin*=authc
-				/user.html=authc
+				/user.html=user
 				/user/student*/**=roles[teacher]
 				/user/teacher*/**=perms["user:create"]
 				/admin=authc
+				
 			</value>
 		</property>
+
+		
+
 	</bean>
 
 	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->

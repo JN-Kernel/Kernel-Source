@@ -83,9 +83,11 @@ public class UserController {
 		Subject subject = SecurityUtils.getSubject();	//取得当前登录的用户
 		
 		if(subject.isRemembered()){
-			
+			System.out.println("isRemembered");
+		}else{
+			System.out.println("notRemembered");
 		}
-
+		
 		User user = UserUtils.getUserByLoginName(userService, loginName);
 		if (user == null) {
 			msg.put("msg", "您输入的账户或密码有误！");
@@ -93,6 +95,11 @@ public class UserController {
 		} else {
 
 			UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(), loginPassword);
+			if(remember != null ){
+				token.setRememberMe(true);
+			}else{
+				token.setRememberMe(false);
+			}
 			try {
 				subject.login(token); // 转入realm检验
 				request.getSession().setAttribute("user", user);
@@ -277,6 +284,25 @@ public class UserController {
 		User user = (User) request.getSession().getAttribute("user");
 		return user != null;
 	}
+	
+	/**
+	 * 获取是否允许登陆后访问，没有登陆或remberme登陆的可以访问
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/isAccessWithLogined", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	public boolean isAccessWithLogined(HttpServletRequest request){
+		boolean flag = true;
+		if(isLogined(request)){
+			Boolean isRemberedLogin = (Boolean) request.getSession().getAttribute("isRemberedLogin");
+			if(!isRemberedLogin){
+				flag = false;
+			}
+		}
+		return flag;
+	}
+	
 	
 	/**
 	 * 获取登陆账户名称

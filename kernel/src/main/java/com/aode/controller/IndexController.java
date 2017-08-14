@@ -15,7 +15,7 @@ import com.aode.service.IIndexService;
 import com.github.pagehelper.PageInfo;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/index")
 public class IndexController {
 	
 	@Resource
@@ -29,7 +29,7 @@ public class IndexController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "search", produces= "application/json;charset=UTF-8")
+	@RequestMapping(value = "/search", produces= "application/json;charset=UTF-8")
 	public PageInfo<Topic> search(HttpServletRequest request,String q,Integer pageNum){
 		if(pageNum == null){
 			pageNum = 1;
@@ -41,7 +41,7 @@ public class IndexController {
 	}
 	
 
-	@RequestMapping(value = "test1", method = RequestMethod.GET, produces= "text/html;charset=UTF-8")
+	@RequestMapping(value = "/test1", method = RequestMethod.GET, produces= "text/html;charset=UTF-8")
 	public String test(){
 		return "success";
 		
@@ -52,7 +52,7 @@ public class IndexController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "getLatestTopicList", method = RequestMethod.POST, produces= "application/json;charset=UTF-8")
+	@RequestMapping(value = "/getLatestTopicList", method = RequestMethod.POST, produces= "application/json;charset=UTF-8")
 	public List<Topic> getLatestTopicList(){
 		List<Topic> list = iIndexService.getLatestTopicList();
 		if(list.isEmpty()){
@@ -62,7 +62,7 @@ public class IndexController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "getLikeTopicList", method = RequestMethod.POST, produces= "application/json;charset=UTF-8")
+	@RequestMapping(value = "/getLikeTopicList", method = RequestMethod.POST, produces= "application/json;charset=UTF-8")
 	public List<Topic> getLikeTopicList(){
 		List<Topic> list = iIndexService.getLikeTopicList();
 		if(list.isEmpty()){
@@ -73,7 +73,7 @@ public class IndexController {
 	
 
 	@ResponseBody
-	@RequestMapping(value = "getTopicList", method = RequestMethod.POST, produces= "application/json;charset=UTF-8")
+	@RequestMapping(value = "/getTopicList", method = RequestMethod.POST, produces= "application/json;charset=UTF-8")
 	public PageInfo<Topic> getTopicList(Integer pageNum){
 		System.out.println(pageNum);
 		if(pageNum == null){
@@ -91,7 +91,7 @@ public class IndexController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "getTopicListByCatoreyId", produces= "application/json;charset=UTF-8")
+	@RequestMapping(value = "/getTopicListByCatoreyId", produces= "application/json;charset=UTF-8")
 	public PageInfo<Topic> getTopicListByCatoreyId(HttpServletRequest request,Integer catoreyId,Integer pageNum){
 		if(pageNum == null){
 			pageNum = 1;
