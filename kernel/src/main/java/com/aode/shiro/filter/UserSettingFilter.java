@@ -23,7 +23,6 @@ public class UserSettingFilter extends AccessControlFilter{
      */
     @Override  
     protected boolean preHandle(ServletRequest request, ServletResponse response) throws Exception {  
-      System.out.println("preHandle");
     	Subject subject = getSubject(request, response);  
         if (subject == null) {  
             return false;  
