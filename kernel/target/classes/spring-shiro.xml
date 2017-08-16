@@ -62,7 +62,7 @@
 				/user/**=anon
 				/index/**=anon,userSetting
 				
-				/user*=user
+				/user*=anon
 				/user/admin*=authc
 				/user.html=user
 				/user/student*/**=roles[teacher]

@@ -74,10 +74,11 @@
 		</div>
 		<!--END TOPBAR-->
 	</div>
-
-	<nav id="sidebar" role="navigation" data-step="2"
-		data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;"
-		data-position="right" class="navbar-default navbar-static-side">
+	 <div id="wrapper">
+	 	<!--BEGIN SIDEBAR MENU-->
+		<nav id="sidebar" role="navigation" data-step="2"
+			data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;"
+			data-position="right" class="navbar-default navbar-static-side">
 		<div class="sidebar-collapse menu-scroll">
 			<ul id="side-menu" class="nav">
 
@@ -90,7 +91,7 @@
 						class="fa fa-desktop fa-fw">
 							<div class="icon-bg bg-pink"></div>
 					</i><span class="menu-title">账户管理</span></a></li>
-				<li><a href="user_publish.html"><i
+				<li class="active"><a href="user_publish.html"><i
 						class="fa fa-send-o fa-fw">
 							<div class="icon-bg bg-green"></div>
 					</i><span class="menu-title">发表主题</span></a></li>
@@ -101,44 +102,59 @@
 						class="fa fa-send-o fa-fw">
 							<div class="icon-bg bg-green"></div>
 					</i><span class="menu-title">文章评论</span></a></li>
-
-
 			</ul>
 		</div>
-	</nav>
+		</nav>
 
-	<div class="row">
-		<div class="col-sm-10">
-			<div class="panel">
-				
-					
+		<div id="page-wrapper">
+			<!--BEGIN TITLE & BREADCRUMB PAGE-->
+            <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+            	<div class="page-header pull-left">
+                	<div class="page-title">
+                     	Data Grid
+					</div>
+            	</div>
+                <div class="clearfix"></div>
+            </div>
+            <!--END TITLE & BREADCRUMB PAGE-->
+		 	<!--BEGIN CONTENT-->
+            <div class="page-content">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="panel">
+							<div class="panel-body">
+							<!--文章-->
 						
-							 <form action="server.php" method="post">
-        						<!-- 加载编辑器的容器 -->
-        						<script id="container" name="content" type="text/plain">
+							<form action="server.php" method="post">
+								<!-- 加载编辑器的容器 -->
+								<script id="container" name="content" type="text/plain">
             					这里写你的初始化内容
         						</script>
-    						</form>
-				
+							</form>
 					
-				
+							<!--文章结束-->
+	
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
+	
 
 
 
 
-
-	<!--BEGIN FOOTER-->
-	<div id="footer">
-		<div class="copyright">
-			<a href="#">Copyright © 2017. All Rights Reserved by
-				KnowledgeBase.</a>
+		<!--BEGIN FOOTER-->
+		<div id="footer">
+			<div class="copyright">
+				<a href="#">Copyright © 2017. All Rights Reserved by
+					KnowledgeBase.</a>
+			</div>
 		</div>
+		<!--END FOOTER-->
+		
 	</div>
-	<!--END FOOTER-->
-
 
 
 
@@ -146,21 +162,23 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/bootstrap-hover-dropdown.js"></script>
 	<script src="js/index.js"></script>
-	
+
 	<!-- ueditor -->
-	 <!-- 配置文件 -->
-    <script type="text/javascript" src="ueditor/ueditor.config.js"></script>
-    <!-- 编辑器源码文件 -->
-    <script type="text/javascript" src="ueditor/ueditor.all.js"></script>
-    <!-- 实例化编辑器 -->
-    <script type="text/javascript">
+	<!-- 配置文件 -->
+	<script type="text/javascript" src="ueditor/ueditor.config.js"></script>
+	<!-- 编辑器源码文件 -->
+	<script type="text/javascript" src="ueditor/ueditor.all.js"></script>
+	<!-- 实例化编辑器 -->
+	<script type="text/javascript">
         var editor = UE.getEditor('container',{
         	 toolbars: [
-        	        ['fullscreen','source', 'bold','italic','underline','forecolor','strikethrough', 'undo','redo', 'insertorderedlist', 'insertunorderedlist', 'preview'],
-        	        [ 'indent', 'justifyleft', 'justifyright', 'justifycenter', 'justifyjustify', 'link', 'unlink', 'inserttable', 'blockquote','formatmatch','searchreplace', 'insertcode']
+        	        ['fullscreen','source', 'bold','italic','underline','forecolor','strikethrough', 'undo','redo', 'insertorderedlist', 'insertunorderedlist',  'insertcode'],
+        	        [ 'indent', 'justifyleft', 'justifyright', 'justifycenter', 'justifyjustify', 'link', 'unlink', 'inserttable', 'blockquote','formatmatch','searchreplace', 'preview']
         	    ],
-        	    autoHeightEnabled:false,
-        	    toolbarTopOffset:800
+        	 autoHeightEnabled:false,
+        	 initialFrameWidth:'100%',
+        	 initialFrameHeight:400
+        	 
         });
     </script>
 
