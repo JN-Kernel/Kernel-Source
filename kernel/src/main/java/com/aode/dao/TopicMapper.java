@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.MapKey;
 
 import com.aode.dto.Topic;
+import com.aode.dto.TopicContent;
 import com.aode.dto.TopicCustomize;
 
 public interface TopicMapper {
@@ -38,17 +39,39 @@ public interface TopicMapper {
 	 */
 	public Topic getTopicById(Integer topicId);
 	
-	/**
-	 * 取出topic的所有信息
-	 * @param topicId
-	 * @return
-	 */
-	public TopicCustomize getTopicContentByTopicId(Integer topicId);
-	
+
 	/**
 	 * 通过catoreyId获取topic
 	 * @param catoreyId
 	 * @return
 	 */
 	public List<Topic> getTopicOfTitleAndIdByCatoreyId(Integer catoreyId);
+	
+	/**
+	 * 保存topic
+	 * @param topic
+	 * @return
+	 */
+	public Integer save(Topic topic);
+	
+	/**
+	 * 通过topicId更新Topic
+	 * @param topic
+	 * @return
+	 */
+	public Integer updateTopicByTopicId(Topic topic);
+	
+	/**
+	 * 通过topicId删除topic
+	 * @param topicId
+	 * @return
+	 */
+	public Integer deleteByTopicId(Integer topicId);
+	
+	/**
+	 * 通过topicId取得topicContent
+	 * @param topicId
+	 * @return
+	 */
+	public TopicContent getTopicContentByTopicId(Integer topicId);
 }

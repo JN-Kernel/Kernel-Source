@@ -8,16 +8,17 @@
 		<result column="phone" property="phone" />
 		<result column="creattime" property="creattime" />
 		<association property="userinfo" javaType="com.aode.dto.Userinfo">
-			<id column="userinfo_id" property="userinfoId"/>
-			<result column="gender" property="gender"/>
-			<result column="birthday" property="birthday"/>
-			<result column="address" property="address"/>
+			<id column="userinfo_id" property="userinfoId" />
+			<result column="gender" property="gender" />
+			<result column="birthday" property="birthday" />
+			<result column="address" property="address" />
 		</association>
 	</resultMap>
 
-	<select id="getUserinfo" parameterType="java.lang.Integer" resultMap="UserResultMap">
-		SELECT user.*,userinfo.* 
-		FROM user,userinfo 
+	<select id="getUserinfo" parameterType="java.lang.Integer"
+		resultMap="UserResultMap">
+		SELECT user.*,userinfo.*
+		FROM user,userinfo
 		WHERE user.user_id = userinfo.user_id
 		AND user.user_id=#{userId}
 	</select>
@@ -39,8 +40,10 @@
 	<select id="getPermissions" resultType="java.lang.String"
 		parameterType="java.lang.String">
 		SELECT permissionname
-		FROM user,user_role,permission,role_permission
-		WHERE user.user_id = user_role.user_id
+		FROM
+		user,user_role,permission,role_permission
+		WHERE user.user_id =
+		user_role.user_id
 		AND user_role.role_id = role_permission.role_id
 		AND
 		role_permission.permission_id = permission.permission_id
@@ -116,8 +119,18 @@
 
 
 	<update id="changePassword" parameterType="com.aode.dto.User">
-		UPDATE user 
+		UPDATE user
 		SET password=#{password}
 		WHERE username=#{username}
+	</update>
+
+	<update id="updateUser" parameterType="com.aode.dto.User">
+		UPDATE user
+		SET username=#{username},
+			password=#{password},
+			email=#{email},
+			phone=#{phone},
+			creattime=#{creattime}
+		WHERE user_id=#{userId}
 	</update>
 </mapper>

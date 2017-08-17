@@ -5,24 +5,22 @@ import java.util.Date;
 public class Topic {
 
 	private Integer topicId;
-	
-	private String title;
-	
-	private Date publishtime;
-	
-	private Integer status;
-	
-	private Integer Replycount;
-	
-	private Integer likecount;
-	
-	private Integer userId;
-	
-	private Integer catoreyId;
-	
-	private TopicContent topicContent;
 
-	
+	private String title;
+
+	private Date publishtime;
+
+	private Integer status;
+
+	private Integer replycount;
+
+	private Integer likecount;
+
+	private Integer userId;
+
+	private Integer catoreyId;
+
+	private TopicContent topicContent;
 
 	public Integer getTopicId() {
 		return topicId;
@@ -49,11 +47,11 @@ public class Topic {
 	}
 
 	public Integer getReplycount() {
-		return Replycount;
+		return replycount;
 	}
 
 	public void setReplycount(Integer replycount) {
-		Replycount = replycount;
+		this.replycount = replycount;
 	}
 
 	public Integer getLikecount() {
@@ -95,5 +93,12 @@ public class Topic {
 	public void setTopicContent(TopicContent topicContent) {
 		this.topicContent = topicContent;
 	}
+
 	
+	@Override
+	public String toString() {
+		return "Topic [topicId=" + topicId + ", title=" + title + ", publishtime=" + publishtime + ", status=" + status
+				+ ", replycount=" + replycount + ", likecount=" + likecount + ", userId=" + userId + ", catoreyId="
+				+ catoreyId + ", topicContent=" + topicContent + "]";
+	}
 }

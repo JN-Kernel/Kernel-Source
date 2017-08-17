@@ -45,6 +45,12 @@ public class TopicContent {
 		this.topicReplys = topicReplys;
 	}
 
+	@Override
+	public String toString() {
+		return "TopicContent [topicContentId=" + topicContentId + ", content=" + content + ", topicId=" + topicId
+				+ ", topicReplys=" + topicReplys + "]";
+	}
+
 	
 	
 	

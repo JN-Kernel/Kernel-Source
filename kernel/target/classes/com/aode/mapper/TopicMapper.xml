@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.aode.dao.TopicMapper">
+
+	<resultMap type="com.aode.dto.Topic" id="TopicResultMap">
+		<id column="topic_id" property="topicId"/>
+		<result column="title" property="title"/>
+		<result column="publishtime" property="publishtime"/>
+		<result column="status" property="status"/>
+		<result column="replycount" property="replycount"/>
+		<result column="likecount" property="likecount"/>
+		<result column="user_id" property="userId"/>
+		<result column="catorey_id" property="catoreyId"/>
+		<association property="topicContent"  javaType="com.aode.dto.TopicContent" column="topic_id" select="getTopicContentByTopicId" />
+	</resultMap>
+	
+	<resultMap type="com.aode.dto.TopicContent" id="TopicContentResultMap">
+		<id column="topic_content_id" property="topicContentId"/>
+		<result column="content" property="content"/>
+		<!-- 一对多
+			collection:对关联查询到的多条记录映射到集合中 
+			property:将关联查询到的多条记录映射到topic类的那个属性 
+			ofType:指定映射的集合属性中pojo的类型 
+		--> 
+		<collection property="topicReplys" ofType="com.aode.dto.TopicReply">
+			<id column="topic_reply_id" property="topicReplyId"/>
+			<result column="trcontent"  property="content"/>
+			<result column="replytime"  property="replytime"/>
+			<result column="status"  property="status"/>
+			<result column="user_id"  property="userId"/>
+			<result column="topic_id"  property="topicId"/>
+		</collection>
+	</resultMap>
+	
 	<select id="getLatestTopicOfTitleAndId"  resultType="com.aode.dto.Topic">
 		SELECT topic_id,title,publishtime,likecount
 		FROM topic 
@@ -21,18 +52,10 @@
 		ORDER BY likecount DESC 
 	</select>
 	
-	<select id="getTopicById" parameterType="java.lang.Integer" resultType="com.aode.dto.Topic">
-		SELECT * 
+	<select id="getTopicById" parameterType="java.lang.Integer" resultMap="TopicResultMap">
+		SELECT *
 		FROM topic 
-		WHERE topic_id=#{topicId}
-	</select>
-	
-	<select id="getTopicContentByTopicId" parameterType="java.lang.Integer" resultType="com.aode.dto.TopicCustomize">
-		SELECT topic.*,topic_content.* 
-		FROM topic 
-		INNER JOIN topic_content 
-		ON topic.topic_id=topic_content.topic_id
-		AND  topic.topic_id =#{topicId}
+		WHERE topic_id =#{topicId}
 	</select>
 	
 	<select id="getTopicOfTitleAndIdByCatoreyId" parameterType="java.lang.Integer" resultType="com.aode.dto.Topic">
@@ -40,5 +63,35 @@
 		FROM topic 
 		WHERE catorey_id =#{catoreyId}
 		ORDER BY publishtime DESC 
+	</select>
+	
+	<insert id="save" parameterType="com.aode.dto.Topic">
+		INSERT 
+		INTO topic (title,publishtime,status,replycount,likecount,user_id,catorey_id)
+		VALUE(#{title},#{publishtime},#{status},#{replycount},#{likecount},#{userId},#{catoreyId})
+	</insert>
+	
+	<update id="updateTopicByTopicId" parameterType="com.aode.dto.Topic">
+		UPDATE topic
+		SET title=#{title},
+			publishtime=#{publishtime},
+			status=#{status},
+			replycount=#{replycount},
+			likecount=#{likecount},
+			user_id=#{userId},
+			catorey_id=#{catoreyId}
+		WHERE topic_id=#{topicId}
+	</update>
+	
+	<delete id="deleteByTopicId" parameterType="java.lang.Integer" >
+		DELETE FROM topic WHERE topic_id=#{topicId}
+	</delete>
+	
+	<select id="getTopicContentByTopicId" parameterType="java.lang.Integer" resultMap="TopicContentResultMap">
+		SELECT tc.*,tr.*,tr.content As trcontent
+		FROM topic_content AS tc
+		INNER JOIN topic_reply AS tr
+		ON tc.topic_id = tr.topic_id
+		AND tc.topic_id=#{topicId}
 	</select>
 </mapper>

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aode.dto.User;
+import com.aode.dto.Userinfo;
 import com.aode.service.IUserService;
 
 import com.aode.util.*;
@@ -326,7 +327,7 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/getUserinfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	public User getUserinfo(HttpServletRequest request){
+	public Userinfo getUserinfo(HttpServletRequest request){
 		User user = (User) request.getSession().getAttribute("user");
 		if(user != null){
 			

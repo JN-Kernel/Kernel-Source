@@ -8,7 +8,8 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.aode.dao.UserMapper;
-import com.aode.dto.User;    
+import com.aode.dto.User;
+import com.aode.dto.Userinfo;
 import com.aode.service.IUserService;    
     
 @Service("userService")    
@@ -38,17 +39,17 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public void updateUser(User user) {
-		userMapper.updateUser(user);
+	public Integer updateUserByUserId(User user) {
+		return userMapper.updateUser(user);
 	}
 
 	@Override
-	public void deleteByUserId(Integer userId) {
-		userMapper.deleteByUserId(userId);
+	public Integer deleteByUserId(Integer userId) {
+		return userMapper.deleteByUserId(userId);
 	}
 
 	@Override
-	public void changePassword(String username, String newPassword) throws Exception {
+	public Integer changePassword(String username, String newPassword) throws Exception {
 		User user = null;
 		user = this.getByUsername(username);
 		if(user != null){
@@ -56,6 +57,7 @@ public class UserServiceImpl implements IUserService {
 		}else{
 			throw new Exception("用户不存在");
 		}
+		return userMapper.changePassword(username, newPassword);
 	}
 
 	@Override
@@ -69,7 +71,7 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public User getUserinfo(Integer userId) {
+	public Userinfo getUserinfo(Integer userId) {
 		return userMapper.getUserinfo(userId);
 	}
 

@@ -65,6 +65,12 @@ public class TopicReply {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
+
+	@Override
+	public String toString() {
+		return "TopicReply [topicReplyId=" + topicReplyId + ", content=" + content + ", topicId=" + topicId
+				+ ", userId=" + userId + ", replytime=" + replytime + ", status=" + status + "]";
+	}
 	
 	
 }

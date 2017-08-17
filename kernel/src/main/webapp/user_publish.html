@@ -11,10 +11,7 @@
 
 <link rel="shortcut icon" href="images/icons/favicon.ico">
 <!--Loading bootstrap css-->
-<link type="text/css" rel="stylesheet"
-	href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
-<link type="text/css" rel="stylesheet"
-	href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
+
 <link type="text/css" rel="stylesheet"
 	href="css/styles/font-awesome.min.css">
 <link type="text/css" rel="stylesheet" href="css/user/bootstrap.min.css">
@@ -74,73 +71,111 @@
 		</div>
 		<!--END TOPBAR-->
 	</div>
-	 <div id="wrapper">
-	 	<!--BEGIN SIDEBAR MENU-->
+	<div id="wrapper">
+		<!--BEGIN SIDEBAR MENU-->
 		<nav id="sidebar" role="navigation" data-step="2"
 			data-intro="Template has &lt;b&gt;many navigation styles&lt;/b&gt;"
 			data-position="right" class="navbar-default navbar-static-side">
-		<div class="sidebar-collapse menu-scroll">
-			<ul id="side-menu" class="nav">
+			<div class="sidebar-collapse menu-scroll">
+				<ul id="side-menu" class="nav">
 
-				<div class="clearfix"></div>
-				<li><a href="user_info.html"><i
-						class="fa fa-tachometer fa-fw">
-							<div class="icon-bg bg-orange"></div>
-					</i><span class="menu-title">我的信息</span></a></li>
-				<li><a href="user_account.html"><i
-						class="fa fa-desktop fa-fw">
-							<div class="icon-bg bg-pink"></div>
-					</i><span class="menu-title">账户管理</span></a></li>
-				<li class="active"><a href="user_publish.html"><i
-						class="fa fa-send-o fa-fw">
-							<div class="icon-bg bg-green"></div>
-					</i><span class="menu-title">发表主题</span></a></li>
-				<li><a href="user.html"><i class="fa fa-send-o fa-fw">
-							<div class="icon-bg bg-green"></div>
-					</i><span class="menu-title">已发表文章</span></a></li>
-				<li><a href="user_comment.html"><i
-						class="fa fa-send-o fa-fw">
-							<div class="icon-bg bg-green"></div>
-					</i><span class="menu-title">文章评论</span></a></li>
-			</ul>
-		</div>
+					<div class="clearfix"></div>
+					<li><a href="user_info.html"><i
+							class="fa fa-tachometer fa-fw">
+								<div class="icon-bg bg-orange"></div>
+						</i><span class="menu-title">我的信息</span></a></li>
+					<li><a href="user_account.html"><i
+							class="fa fa-desktop fa-fw">
+								<div class="icon-bg bg-pink"></div>
+						</i><span class="menu-title">账户管理</span></a></li>
+					<li class="active"><a href="user_publish.html"><i
+							class="fa fa-send-o fa-fw">
+								<div class="icon-bg bg-green"></div>
+						</i><span class="menu-title">发表主题</span></a></li>
+					<li><a href="user.html"><i class="fa fa-send-o fa-fw">
+								<div class="icon-bg bg-green"></div>
+						</i><span class="menu-title">已发表文章</span></a></li>
+					<li><a href="user_comment.html"><i
+							class="fa fa-send-o fa-fw">
+								<div class="icon-bg bg-green"></div>
+						</i><span class="menu-title">文章评论</span></a></li>
+				</ul>
+			</div>
 		</nav>
 
 		<div id="page-wrapper">
 			<!--BEGIN TITLE & BREADCRUMB PAGE-->
-            <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
-            	<div class="page-header pull-left">
-                	<div class="page-title">
-                     	Data Grid
-					</div>
-            	</div>
-                <div class="clearfix"></div>
-            </div>
-            <!--END TITLE & BREADCRUMB PAGE-->
-		 	<!--BEGIN CONTENT-->
-            <div class="page-content">
+			<div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+				<div class="page-header pull-left">
+					<div class="page-title">发表文章</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<!--END TITLE & BREADCRUMB PAGE-->
+			<!--BEGIN CONTENT-->
+			<div class="page-content">
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="panel">
-							<div class="panel-body">
-							<!--文章-->
-						
-							<form action="server.php" method="post">
-								<!-- 加载编辑器的容器 -->
-								<script id="container" name="content" type="text/plain">
-            					这里写你的初始化内容
-        						</script>
-							</form>
-					
-							<!--文章结束-->
-	
+							<div  class="panel-body">
+								<!--编辑-->
+								
+								<form class="form-horizontal">
+									<div class="form-group">
+										<label class="col-sm-1 control-label">标 题 :</label>
+
+										<div class="col-sm-11 controls">
+											<div class="row">
+												<div class="col-xs-10">
+													<input type="text" placeholder="文章标题" class="form-control"
+														disbled />
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-1 control-label">分 类 :</label>
+										<div class="col-sm-11 controls">
+											<div class="row">
+												<div class="col-xs-10">
+													<select id="catoerySelect" class="form-control">
+														<option value="0">选择文章分类</option>
+														<option value="development">Development</option>
+														<option value="illustration">Illustration</option>
+														<option value="brading">Branding</option>
+														<option value="video">Video</option>
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-1 control-label">正 文 :</label>
+
+										<div class="col-sm-11 controls">
+											<div class="row">
+												<div class="col-xs-10">
+													<!-- 加载编辑器的容器 -->
+													<script id="container" name="content" type="text/plain">   					
+        											</script>
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+								<hr/>
+								<button id="submitButton" class="btn btn-blue btn-block">发 表</button>								
+
+								<!--编辑结束-->
+
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	
+
 
 
 
@@ -153,7 +188,7 @@
 			</div>
 		</div>
 		<!--END FOOTER-->
-		
+
 	</div>
 
 
@@ -168,19 +203,13 @@
 	<script type="text/javascript" src="ueditor/ueditor.config.js"></script>
 	<!-- 编辑器源码文件 -->
 	<script type="text/javascript" src="ueditor/ueditor.all.js"></script>
+	<!-- 加载语言文件 -->
+	<script type="text/javascript" src="ueditor/lang/zh-cn/zh-cn.js"></script>
 	<!-- 实例化编辑器 -->
-	<script type="text/javascript">
-        var editor = UE.getEditor('container',{
-        	 toolbars: [
-        	        ['fullscreen','source', 'bold','italic','underline','forecolor','strikethrough', 'undo','redo', 'insertorderedlist', 'insertunorderedlist',  'insertcode'],
-        	        [ 'indent', 'justifyleft', 'justifyright', 'justifycenter', 'justifyjustify', 'link', 'unlink', 'inserttable', 'blockquote','formatmatch','searchreplace', 'preview']
-        	    ],
-        	 autoHeightEnabled:false,
-        	 initialFrameWidth:'100%',
-        	 initialFrameHeight:400
-        	 
-        });
-    </script>
+	<script type="text/javascript" src="js/private/ueditor.js"></script>
+	
+	<!-- 页面处理 -->
+	<script type="text/javascript" src="js/private/publish.js"></script>
 
 
 
