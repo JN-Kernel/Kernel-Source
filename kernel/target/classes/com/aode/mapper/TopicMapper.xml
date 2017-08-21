@@ -65,7 +65,19 @@
 		ORDER BY publishtime DESC 
 	</select>
 	
-	<insert id="save" parameterType="com.aode.dto.Topic">
+	<insert id="saveTopicContent" parameterType="com.aode.dto.Topic">
+		
+		INSERT 
+		INTO topic_content (content,topic_id)
+		VALUE(#{content},#{topicId})
+	</insert>
+	
+	<insert id="saveTopic" parameterType="com.aode.dto.TopicContent">
+		<!-- 获取插入后的主键 -->
+		<selectKey keyProperty="topicId" resultType='java.lang.Integer'
+			order='AFTER'>
+			SELECT LAST_INSERT_ID();
+		</selectKey>
 		INSERT 
 		INTO topic (title,publishtime,status,replycount,likecount,user_id,catorey_id)
 		VALUE(#{title},#{publishtime},#{status},#{replycount},#{likecount},#{userId},#{catoreyId})

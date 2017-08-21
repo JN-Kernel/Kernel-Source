@@ -3,6 +3,7 @@ package com.aode.service.impl;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.aode.dao.TopicMapper;
 import com.aode.dto.Topic;
@@ -16,12 +17,16 @@ public class TopicService implements ITopicService {
 	
 	@Override
 	public Integer publish(Topic topic) {
-		return topicMapper.save(topic);
+		return topicMapper.saveTopic(topic);
 	}
 
+	@Transactional
 	@Override
 	public Integer save(Topic topic) {
-		return topicMapper.save(topic);
+		topicMapper.saveTopic(topic);
+		topic.getTopicContent().setTopicId(topic.getTopicId());
+		topicMapper.saveTopicContent(topic.getTopicContent());
+		return 1;
 	}
 
 	@Override

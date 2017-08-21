@@ -10,5 +10,7 @@
         <setting name="aggressiveLazyLoading" value="true"/>  
         <!-- 下划线转驼峰命名 -->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!-- 打印SQL -->
+        <setting name="logImpl" value="LOG4J"/>
     </settings>  
 </configuration>  

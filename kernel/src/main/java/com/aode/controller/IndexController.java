@@ -1,6 +1,8 @@
 package com.aode.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aode.dto.Topic;
 import com.aode.service.IIndexService;
+import com.aode.service.ITopicService;
 import com.github.pagehelper.PageInfo;
 
 @Controller
@@ -20,6 +23,9 @@ public class IndexController {
 	
 	@Resource
 	private IIndexService iIndexService;
+	
+	@Resource
+	ITopicService topicService;
 	
 	/**
 	 * 搜索
@@ -48,7 +54,7 @@ public class IndexController {
 	}
 	
 	/**
-	 * 取得最新发表的topic
+	 * 取得最新发表的topic列表
 	 * @return
 	 */
 	@ResponseBody
@@ -72,6 +78,11 @@ public class IndexController {
 	}
 	
 
+	/**
+	 * 取得TopicList
+	 * @param pageNum
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/getTopicList", method = RequestMethod.POST, produces= "application/json;charset=UTF-8")
 	public PageInfo<Topic> getTopicList(Integer pageNum){
@@ -100,5 +111,20 @@ public class IndexController {
 		PageInfo<Topic> pageInfo =  iIndexService.getTopicListByCatoreyId(catoreyId, pageNum, pageSize);
 		return pageInfo;
 		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/getTopic",produces= "application/json;charset=UTF-8")
+	public Map<String,Object> getTopic(Integer topicId){
+		Map<String,Object> msg = new HashMap<String, Object>();
+		Topic topic = topicService.getTopicByTopicId(topicId);
+		if(topic != null){
+			msg.put("data", topic);
+			msg.put("stauts", "success");
+		}else{
+			msg.put("data", "找不到该文章！");
+			msg.put("stauts", "error");
+		}
+		return msg;
 	}
 }

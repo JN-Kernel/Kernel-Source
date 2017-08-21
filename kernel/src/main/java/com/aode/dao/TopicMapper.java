@@ -52,7 +52,14 @@ public interface TopicMapper {
 	 * @param topic
 	 * @return
 	 */
-	public Integer save(Topic topic);
+	public Integer saveTopic(Topic topic);
+	
+	/**
+	 * 保存topicContent
+	 * @param topicContent
+	 * @return
+	 */
+	public Integer saveTopicContent(TopicContent topicContent);
 	
 	/**
 	 * 通过topicId更新Topic
