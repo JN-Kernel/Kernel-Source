@@ -22,6 +22,8 @@ public class Topic {
 
 	private TopicContent topicContent;
 
+	private String catoreyname;
+	
 	public Integer getTopicId() {
 		return topicId;
 	}
@@ -95,10 +97,21 @@ public class Topic {
 	}
 
 	
+	
+	public String getCatoreyname() {
+		return catoreyname;
+	}
+
+	public void setCatoreyname(String catoreyname) {
+		this.catoreyname = catoreyname;
+	}
+
 	@Override
 	public String toString() {
 		return "Topic [topicId=" + topicId + ", title=" + title + ", publishtime=" + publishtime + ", status=" + status
 				+ ", replycount=" + replycount + ", likecount=" + likecount + ", userId=" + userId + ", catoreyId="
-				+ catoreyId + ", topicContent=" + topicContent + "]";
+				+ catoreyId + ", topicContent=" + topicContent + ", catoreyname=" + catoreyname + "]";
 	}
+
+	
 }

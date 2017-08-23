@@ -7,7 +7,8 @@ import org.apache.ibatis.annotations.MapKey;
 
 import com.aode.dto.Topic;
 import com.aode.dto.TopicContent;
-import com.aode.dto.TopicCustomize;
+import com.aode.dto.TopicReply;
+import com.aode.dto.TopicReplyPage;
 
 public interface TopicMapper {
 
@@ -81,4 +82,12 @@ public interface TopicMapper {
 	 * @return
 	 */
 	public TopicContent getTopicContentByTopicId(Integer topicId);
+	
+	/**
+	 * 通过topicId以及分页数据获取topicReply
+	 * @param topicReplyPage
+	 * @return
+	 */
+	public List<TopicReply> getTopicReplysByTopicId(Integer topicId);
+	
 }

@@ -11,6 +11,7 @@
 		<result column="likecount" property="likecount"/>
 		<result column="user_id" property="userId"/>
 		<result column="catorey_id" property="catoreyId"/>
+		<result column="catoreyname" property="catoreyname"/>	
 		<association property="topicContent"  javaType="com.aode.dto.TopicContent" column="topic_id" select="getTopicContentByTopicId" />
 	</resultMap>
 	
@@ -21,8 +22,7 @@
 			collection:对关联查询到的多条记录映射到集合中 
 			property:将关联查询到的多条记录映射到topic类的那个属性 
 			ofType:指定映射的集合属性中pojo的类型 
-		--> 
-		<collection property="topicReplys" ofType="com.aode.dto.TopicReply">
+		<collection property="topicReplys" ofType="com.aode.dto.TopicReplyPage">
 			<id column="topic_reply_id" property="topicReplyId"/>
 			<result column="trcontent"  property="content"/>
 			<result column="replytime"  property="replytime"/>
@@ -30,6 +30,7 @@
 			<result column="user_id"  property="userId"/>
 			<result column="topic_id"  property="topicId"/>
 		</collection>
+		--> 
 	</resultMap>
 	
 	<select id="getLatestTopicOfTitleAndId"  resultType="com.aode.dto.Topic">
@@ -55,7 +56,9 @@
 	<select id="getTopicById" parameterType="java.lang.Integer" resultMap="TopicResultMap">
 		SELECT *
 		FROM topic 
-		WHERE topic_id =#{topicId}
+		INNER JOIN catorey 
+		WHERE topic.catorey_id = catorey.catorey_id
+		AND topic_id =#{topicId}
 	</select>
 	
 	<select id="getTopicOfTitleAndIdByCatoreyId" parameterType="java.lang.Integer" resultType="com.aode.dto.Topic">
@@ -100,10 +103,15 @@
 	</delete>
 	
 	<select id="getTopicContentByTopicId" parameterType="java.lang.Integer" resultMap="TopicContentResultMap">
-		SELECT tc.*,tr.*,tr.content As trcontent
-		FROM topic_content AS tc
-		INNER JOIN topic_reply AS tr
-		ON tc.topic_id = tr.topic_id
-		AND tc.topic_id=#{topicId}
+		SELECT *
+		FROM topic_content
+		WHERE topic_id=#{topicId};
 	</select>
+	
+	<select id="getTopicReplysByTopicId" parameterType="java.lang.Integer" resultType="com.aode.dto.TopicReply">
+		SELECT * 
+		FROM topic_reply 
+		WHERE topic_id=#{topicId}
+	</select>
+	
 </mapper>

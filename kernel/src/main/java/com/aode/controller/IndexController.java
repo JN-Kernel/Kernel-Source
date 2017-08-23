@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aode.dto.Topic;
+import com.aode.dto.TopicReply;
 import com.aode.service.IIndexService;
 import com.aode.service.ITopicService;
 import com.github.pagehelper.PageInfo;
@@ -113,6 +114,11 @@ public class IndexController {
 		
 	}
 	
+	/**
+	 * 取出topic的内容
+	 * @param topicId
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/getTopic",produces= "application/json;charset=UTF-8")
 	public Map<String,Object> getTopic(Integer topicId){
@@ -127,4 +133,26 @@ public class IndexController {
 		}
 		return msg;
 	}
+	
+	/**
+	 * 取出topicReply
+	 * @param topicId
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getTopicReplys", method=RequestMethod.POST, produces= "application/json;charset=UTF-8")
+	public Map<String,Object> getTopicReplys(Integer topicId,Integer pageNum){
+		Map<String,Object> msg = new HashMap<String, Object>();
+		Integer pageSize = 8;
+		PageInfo<TopicReply> replys = topicService.getTopicReplysByTopicId(topicId, pageNum, pageSize);
+		if(replys.getSize() <= 0 ){
+			msg.put("data", "暂时还没有评论，赶紧发表你的看法吧！");
+			msg.put("stauts", "nodata");
+		}else{
+			msg.put("data", replys);
+			msg.put("stauts", "success");
+		}
+		return msg;	
+	}
+	
 }

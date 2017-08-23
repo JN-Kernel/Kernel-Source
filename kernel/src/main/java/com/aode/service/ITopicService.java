@@ -1,6 +1,10 @@
 package com.aode.service;
 
+import java.util.List;
+
 import com.aode.dto.Topic;
+import com.aode.dto.TopicReply;
+import com.github.pagehelper.PageInfo;
 
 public interface ITopicService {
 	/**
@@ -37,4 +41,13 @@ public interface ITopicService {
 	 * @return
 	 */
 	public Integer updateByTopicId(Topic topic);
+	
+	/**
+	 * 取出topic的reply
+	 * @param topicId
+	 * @return
+	 */
+	public PageInfo<TopicReply> getTopicReplysByTopicId(Integer topicId,int pageNum,int pageSize);
+	
+	
 }

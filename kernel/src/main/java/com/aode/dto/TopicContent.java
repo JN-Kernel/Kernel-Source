@@ -3,16 +3,13 @@ package com.aode.dto;
 import java.util.List;
 
 public class TopicContent {
-	
-	private Integer topicContentId;
-	
-	private String content;
-	
-	private Integer topicId;
-	
-	private List<TopicReply> topicReplys;
 
-	
+	private Integer topicContentId;
+
+	private String content;
+
+	private Integer topicId;
+
 	public Integer getTopicContentId() {
 		return topicContentId;
 	}
@@ -37,22 +34,9 @@ public class TopicContent {
 		this.topicId = topicId;
 	}
 
-	public List<TopicReply> getTopicReplys() {
-		return topicReplys;
-	}
-
-	public void setTopicReplys(List<TopicReply> topicReplys) {
-		this.topicReplys = topicReplys;
-	}
-
 	@Override
 	public String toString() {
-		return "TopicContent [topicContentId=" + topicContentId + ", content=" + content + ", topicId=" + topicId
-				+ ", topicReplys=" + topicReplys + "]";
+		return "TopicContent [topicContentId=" + topicContentId + ", content=" + content + ", topicId=" + topicId + "]";
 	}
 
-	
-	
-	
-	
 }
