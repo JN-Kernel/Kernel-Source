@@ -1,14 +1,9 @@
 package com.aode.dao;
 
 import java.util.List;
-import java.util.Map;
-
-import org.apache.ibatis.annotations.MapKey;
-
 import com.aode.dto.Topic;
 import com.aode.dto.TopicContent;
 import com.aode.dto.TopicReply;
-import com.aode.dto.TopicReplyPage;
 
 public interface TopicMapper {
 
