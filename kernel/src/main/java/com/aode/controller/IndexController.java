@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aode.dto.Topic;
@@ -123,12 +124,13 @@ public class IndexController {
 	@RequestMapping(value="/getTopic",produces= "application/json;charset=UTF-8")
 	public Map<String,Object> getTopic(Integer topicId){
 		Map<String,Object> msg = new HashMap<String, Object>();
-		Topic topic = topicService.getTopicByTopicId(topicId);
+		
+		Topic topic = topicService.getTopicByTopicId(topicId);			
 		if(topic != null){
 			msg.put("data", topic);
 			msg.put("stauts", "success");
 		}else{
-			msg.put("data", "找不到该文章！");
+			msg.put("data", "找不到id为"+topicId+"的文章！");
 			msg.put("stauts", "error");
 		}
 		return msg;

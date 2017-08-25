@@ -85,7 +85,7 @@ function getData(toUrl, obj, removeObj) {
 					$.each(data, function(n, value) {
 						var date = new Date(value.publishtime);
 						var str = '<li class="article-entry standard">'
-								+ '<h4><a href="single.html?topicId='
+								+ '<h4><a href="topic.html?topicId='
 								+ value.topicId + '">' + value.title
 								+ '</a></h4>' + '<span class="article-meta">'
 								+ date.toLocaleString() + '</span>'
@@ -145,7 +145,7 @@ function dataPadding(data) {
 		var str = '<article class="format-standard type-post hentry clearfix">'
 				+ '<header class="clearfix">' 
 				+ '<h3 class="post-title">'
-				+ '<a href="single.html?topicId='
+				+ '<a href="topic.html?topicId='
 				+ value.topicId
 				+ '">'
 				+ value.title
@@ -167,7 +167,7 @@ function dataPadding(data) {
 				+ '</header>'
 				+ '<p>'
 				+ value.content
-				+ '. . . <a class="readmore-link" href="single.html?topicId='
+				+ '. . . <a class="readmore-link" href="topic.html?topicId='
 				+ value.topicId 
 				+ '">查看详情</a></p>' 
 				+ '</article>';

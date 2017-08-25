@@ -1,6 +1,8 @@
 package com.aode.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import com.aode.dto.Topic;
 import com.aode.dto.TopicContent;
 import com.aode.dto.TopicReply;
@@ -85,4 +87,10 @@ public interface TopicMapper {
 	 */
 	public List<TopicReply> getTopicReplysByTopicId(Integer topicId);
 	
+	/**
+	 * 根据topicId和replyToReplyId获取子回复
+	 * @param map
+	 * @return
+	 */
+	public List<TopicReply> getChildReplysByTopicId(Map map);
 }

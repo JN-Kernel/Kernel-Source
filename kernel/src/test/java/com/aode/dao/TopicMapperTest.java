@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aode.dto.Topic;
 import com.aode.dto.TopicContent;
+import com.aode.dto.TopicReply;
 
 @RunWith(value=SpringJUnit4ClassRunner.class) 
 @WebAppConfiguration 
@@ -38,9 +39,11 @@ public class TopicMapperTest {
 	@Test
 	public void testGetTopicContentByTopicId() {
 //		fail("Not yet implemented");
-//		TopicContent topic =topicMapper.getTopicContentByTopicId(1);
+//		TopicContent topic =topicMapper.getTopicContentByTopicId(2);
 //		int i = 1/0;
 //		System.out.println(topic);
+		List<TopicReply> replys = topicMapper.getTopicReplysByTopicId(1);
+		System.out.println(replys);
 	}
 
 	@Test
@@ -53,7 +56,7 @@ public class TopicMapperTest {
 	@Transactional
 	@Test
 	public void testSave() {
-//		fail("Not yet implemented");
+		fail("Not yet implemented");
 		Topic topic = new Topic();
 		topic.setTitle("test save2");
 		topic.setLikecount(1);

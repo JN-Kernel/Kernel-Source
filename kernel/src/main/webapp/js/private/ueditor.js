@@ -6,7 +6,7 @@
 				[ 'fullscreen', 'source', 'bold', 'italic', 'underline',
 						'forecolor', 'strikethrough', 'forecolor', 'undo',
 						'redo', 'insertorderedlist', 'insertunorderedlist',
-						'fontsize', 'paragraph', 'insertcode', 'customstyle' ],
+						'fontsize', 'paragraph', 'insertcode' ],
 				[ 'indent', 'justifyleft', 'justifyright', 'justifycenter',
 						'justifyjustify', 'link', 'unlink', 'inserttable',
 						'blockquote', 'formatmatch', 'searchreplace', 'drafts',

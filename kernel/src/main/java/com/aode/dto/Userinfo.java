@@ -14,6 +14,7 @@ public class Userinfo {
 	
 	private Integer userId;
 
+	private String head;
 	
 	public Integer getUserinfoId() {
 		return UserinfoId;
@@ -53,6 +54,14 @@ public class Userinfo {
 
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+
+	public String getHead() {
+		return head;
+	}
+
+	public void setHead(String head) {
+		this.head = head;
 	}
 	
 	
