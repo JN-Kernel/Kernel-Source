@@ -6,8 +6,10 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import com.aode.dao.TopicMapper;
+import com.aode.dto.Like;
 import com.aode.dto.Topic;
 import com.aode.dto.TopicReply;
 import com.aode.service.ITopicService;
@@ -55,6 +57,23 @@ public class TopicService implements ITopicService {
 		List<TopicReply> replys = topicMapper.getTopicReplysByTopicId(topicId);
 		PageInfo<TopicReply> page = new PageInfo<TopicReply>(replys);
 		return page;
+	}
+
+	@Transactional
+	@Override
+	public Boolean chickLike(Like like) {
+		Integer resultFirst = topicMapper.chickLike(like);
+		Integer likeCount = topicMapper.getLikecountByTopicId(like.getTopicId());
+		Topic topic = new Topic();
+		topic.setLikecount(likeCount+1);
+		Integer resultSecond = topicMapper.updateTopicByTopicId(topic);
+		if(resultFirst > 0 && resultSecond > 0 ){
+			return true;
+		}else{
+			//手动回滚
+			 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+			 return false;
+		}
 	}
 
 }

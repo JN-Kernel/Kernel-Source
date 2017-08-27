@@ -29,10 +29,9 @@
 			property:将关联查询到的多条记录映射到topic类的那个属性 
 			ofType:指定映射的集合属性中pojo的类型 
 		--> 
-		<collection property="childReplys" column="{topicId=topic_id,replyId=topic_reply_id}" ofType="com.aode.dto.TopicReply" select="getChildReplysByTopicId"/>
-			
-		
+		<collection property="childReplys" column="{topicId=topic_id,replyId=topic_reply_id}" ofType="com.aode.dto.TopicReply" select="getChildReplysByTopicId"/>	
 	</resultMap>
+	
 	
 	<select id="getLatestTopicOfTitleAndId"  resultType="com.aode.dto.Topic">
 		SELECT topic_id,title,publishtime,likecount
@@ -89,13 +88,29 @@
 	
 	<update id="updateTopicByTopicId" parameterType="com.aode.dto.Topic">
 		UPDATE topic
-		SET title=#{title},
-			publishtime=#{publishtime},
-			status=#{status},
-			replycount=#{replycount},
-			likecount=#{likecount},
-			user_id=#{userId},
-			catorey_id=#{catoreyId}
+		<set>
+			<if test="title != null">
+				title=#{title},	
+			</if>
+			<if test="publishtime != null">
+				publishtime=#{publishtime},
+			</if>
+			<if test="status != null">
+				status=#{status},
+			</if>
+			<if test="replycount != null">
+				replycount=#{replycount},
+			</if>
+			<if test="likecount != null">
+				likecount=#{likecount},
+			</if>
+			<if test="userId != null">
+				user_id=#{userId},
+			</if>
+			<if test="catoreyId != null">
+				catorey_id=#{catoreyId}
+			</if>
+		</set>
 		WHERE topic_id=#{topicId}
 	</update>
 	
@@ -132,5 +147,26 @@
 		AND reply_to_reply_id = #{replyId}
 		ORDER BY replytime ASC
 	</select>
+	<select id="getLike" parameterType="com.aode.dto.Like" resultType="java.lang.Integer">
+		SELECT like_id 
+		FROM `like` 
+		WHERE user_id=#{userId}
+		AND topic_id=#{topicId}
+	</select>
 	
+	<insert id="chickLike" parameterType="com.aode.dto.Like" >
+		<!-- 获取插入后的主键 -->
+		<selectKey keyProperty="likeId" resultType='java.lang.Integer'
+			order='AFTER'>
+			SELECT LAST_INSERT_ID();
+		</selectKey>
+		INSERT INTO `like`(user_id,topic_Id,time) 
+		VALUE(#{userId},#{topicId},#{time})
+	</insert>
+	
+	<select id="getLikecountByTopicId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		SELECT likecount 
+		FROM topic 
+		WHERE topic_id=#{topicId}
+	</select>
 </mapper>

@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.aode.dao.TopicMapper;
+import com.aode.dto.Like;
 import com.aode.dto.Topic;
 import com.aode.service.IIndexService;
 import com.github.pagehelper.Page;
@@ -67,6 +68,20 @@ public class IndexServiceImpl implements IIndexService {
 		List<Topic> topicList = topicMapper.getTopicOfTitleAndIdByCatoreyId(catoreyId);
 		PageInfo<Topic> pageInfo = new PageInfo<Topic>(topicList);
 		return pageInfo;
+	}
+
+
+
+	@Override
+	public Boolean isLiked(Integer userId, Integer topicId) {
+		Like temp = new Like();
+		temp.setUserId(userId);
+		temp.setTopicId(topicId);
+		Integer likeId = topicMapper.getLike(temp);
+		if(likeId == null){
+			return false;
+		}
+		return true;
 	}
 
 

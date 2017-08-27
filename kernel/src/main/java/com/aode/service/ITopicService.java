@@ -2,6 +2,7 @@ package com.aode.service;
 
 import java.util.List;
 
+import com.aode.dto.Like;
 import com.aode.dto.Topic;
 import com.aode.dto.TopicReply;
 import com.github.pagehelper.PageInfo;
@@ -49,5 +50,10 @@ public interface ITopicService {
 	 */
 	public PageInfo<TopicReply> getTopicReplysByTopicId(Integer topicId,int pageNum,int pageSize);
 	
-	
+	/**
+	 * 点赞操作
+	 * @param like
+	 * @return
+	 */
+	public Boolean chickLike(Like like);
 }

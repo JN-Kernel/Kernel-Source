@@ -45,4 +45,12 @@ public interface IIndexService {
 	 * @return
 	 */
 	public PageInfo<Topic> getTopicListByCatoreyId(Integer catoreyId,int pageNum,int pageSize);
+	
+	/**
+	 * 通过userId和topicId判断用户是否已点击like
+	 * @param userId
+	 * @param topicId
+	 * @return
+	 */
+	public Boolean isLiked(Integer userId,Integer topicId);
 }

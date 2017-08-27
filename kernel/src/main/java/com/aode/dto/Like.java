@@ -12,6 +12,7 @@ public class Like {
 	
 	private Integer topicId;
 
+	private Integer likeCount;
 
 
 	public Integer getLikeId() {
@@ -44,6 +45,14 @@ public class Like {
 
 	public void setTopicId(Integer topicId) {
 		this.topicId = topicId;
+	}
+
+	public Integer getLikeCount() {
+		return likeCount;
+	}
+
+	public void setLikeCount(Integer likeCount) {
+		this.likeCount = likeCount;
 	}
 	
 	

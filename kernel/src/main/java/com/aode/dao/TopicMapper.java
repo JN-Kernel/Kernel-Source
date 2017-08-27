@@ -3,6 +3,7 @@ package com.aode.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.aode.dto.Like;
 import com.aode.dto.Topic;
 import com.aode.dto.TopicContent;
 import com.aode.dto.TopicReply;
@@ -93,4 +94,26 @@ public interface TopicMapper {
 	 * @return
 	 */
 	public List<TopicReply> getChildReplysByTopicId(Map map);
+	
+	/**
+	 * 通过userId和topicId获取like信息
+	 * @param userIdAndTopicId
+	 * @return
+	 */
+	public Integer getLike(Like userIdAndTopicId);
+	
+	/**
+	 * 点赞记录
+	 * @param like
+	 * @return
+	 */
+	public Integer chickLike(Like like);
+	
+	/**
+	 * 获取点赞数
+	 * @param topicId
+	 * @return
+	 */
+	public Integer getLikecountByTopicId(Integer topicId);
+	
 }

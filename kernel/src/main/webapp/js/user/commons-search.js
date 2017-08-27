@@ -99,6 +99,9 @@ function dataPadding(data) {
 
 
 function pagination(data){
+	if(data.size <= 0){
+		return 0;
+	}
 	$("#planeList").append('<ul id="paginationUl" class="pagination"></ul>');
 	var paginationUl = $("#paginationUl");
 	if(data.hasPreviousPage){

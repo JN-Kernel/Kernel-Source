@@ -1,5 +1,6 @@
 package com.aode.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.aode.dto.Like;
 import com.aode.dto.Topic;
 import com.aode.dto.TopicReply;
+import com.aode.dto.User;
 import com.aode.service.IIndexService;
 import com.aode.service.ITopicService;
 import com.github.pagehelper.PageInfo;
@@ -156,5 +159,67 @@ public class IndexController {
 		}
 		return msg;	
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/getLikeStauts", method=RequestMethod.POST, produces= "application/json;charset=UTF-8")
+	public Map<String,Object> getLikeStauts(HttpServletRequest request,Integer topicId){
+		Map<String,Object> msg = new HashMap<String, Object>();
+		User user = (User) request.getSession().getAttribute("user");
+		if(topicId == null){
+			msg.put("data", "缺少查询参数！！!");
+			msg.put("stauts", "error");
+			return msg;
+		}
+		
+		if(user == null){
+			msg.put("data", "请登陆后再进行点赞操作!");
+			msg.put("stauts", "error");
+			return msg;
+		}else{
+			Integer userId = user.getUserId();
+			if(userId == null){
+				msg.put("data", "后台数据异常，暂时无法进行点赞操作!");
+				msg.put("stauts", "error");
+				return msg;
+			}
+			if(iIndexService.isLiked(userId, topicId)){
+				msg.put("data", "您已经点过赞了!");
+				msg.put("stauts", "info");
+				return msg;
+			}else{
+				msg.put("data", "给这篇文章点赞!");
+				msg.put("stauts", "success");
+				return msg;
+			}
+		}
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/likeTopic", method=RequestMethod.POST,produces="application/json;charset=UTF-8")
+	public Map<String,Object> chickLike(HttpServletRequest request,Integer topicId){
+		Map<String,Object> msg = new HashMap<String, Object>();
+		//topicId已经在获取likeStauts时已经检验
+		Map<String,Object> likeStauts = getLikeStauts(request, topicId);
+		if("success".equals(likeStauts.get("stauts"))){
+			User user = (User) request.getSession().getAttribute("user");	
+			Like like = new Like();
+			like.setUserId(user.getUserId());
+			like.setTopicId(topicId);
+			like.setTime(new Date());
+			if(topicService.chickLike(like)){
+				msg.put("data", "点赞成功！");
+				msg.put("stauts", "success");
+			}else{
+				msg.put("data", "点赞失败！请稍后再试！");
+				msg.put("stauts", "error");
+			}
+			return msg;
+			
+		}else{
+			return likeStauts;
+		}
+	}
+	
 	
 }
