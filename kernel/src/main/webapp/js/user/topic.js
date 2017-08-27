@@ -7,8 +7,11 @@ $(function(){
 		alert("错误请求！");
 		$(window).attr('location',url);					
 	}else{
+		$("#likeBtn").click(function(){
+			alert("aa");
+		});
 		//获取数据
-		getTopic(param);
+//		getTopic(param);
 
 	}
 	
@@ -58,6 +61,12 @@ function getTopic(param){
 				alert("ss");
 				//topic content
 				$("#topic_content").html(topic.content);
+				
+				//like-btn
+				$("#like-it-form").children("span.like-it").text(topic.likecount);
+				$("#like-it-form").click(function(){
+					alert("aa");
+				});
 				
 				//Comments
 				$("#comments-title").text(topic.replycount+"条评论");
