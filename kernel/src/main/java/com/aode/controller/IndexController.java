@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,8 +43,9 @@ public class IndexController {
 	@ResponseBody
 	@RequestMapping(value = "/search", produces= "application/json;charset=UTF-8")
 	public PageInfo<Topic> search(HttpServletRequest request,String q,Integer pageNum){
-		if(pageNum == null){
-			pageNum = 1;
+		pageNum = (pageNum == null)?1:pageNum;
+		if(q == null || "".equals(q)){
+			return getTopicList(pageNum);
 		}
 		Integer pageSize = 10;
 		PageInfo<Topic> pageInfo =  iIndexService.search(q, pageNum, pageSize);
@@ -89,12 +91,10 @@ public class IndexController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value = "/getTopicList", method = RequestMethod.POST, produces= "application/json;charset=UTF-8")
+	@RequestMapping(value = "/getTopicList", method = RequestMethod.GET, produces= "application/json;charset=UTF-8")
 	public PageInfo<Topic> getTopicList(Integer pageNum){
 		System.out.println(pageNum);
-		if(pageNum == null){
-			pageNum = 1;
-		}
+		pageNum = (pageNum == null)?1:pageNum;
 		Integer pageSize = 10;
 		return iIndexService.getTopicList(pageNum, pageSize);
 	}
@@ -109,9 +109,10 @@ public class IndexController {
 	@ResponseBody
 	@RequestMapping(value = "/getTopicListByCatoreyId", produces= "application/json;charset=UTF-8")
 	public PageInfo<Topic> getTopicListByCatoreyId(HttpServletRequest request,Integer catoreyId,Integer pageNum){
-		if(pageNum == null){
-			pageNum = 1;
+		if(catoreyId == null){
+			return getTopicList(pageNum);
 		}
+		pageNum = (pageNum == null)?1:pageNum;
 		Integer pageSize = 10;
 		PageInfo<Topic> pageInfo =  iIndexService.getTopicListByCatoreyId(catoreyId, pageNum, pageSize);
 		return pageInfo;
@@ -127,7 +128,11 @@ public class IndexController {
 	@RequestMapping(value="/getTopic",produces= "application/json;charset=UTF-8")
 	public Map<String,Object> getTopic(Integer topicId){
 		Map<String,Object> msg = new HashMap<String, Object>();
-		
+		if(topicId == null){
+			msg.put("data", "缺少参数！");
+			msg.put("stauts", "error");
+			return msg;
+		}
 		Topic topic = topicService.getTopicByTopicId(topicId);			
 		if(topic != null){
 			msg.put("data", topic);
@@ -145,9 +150,17 @@ public class IndexController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping(value="/getTopicReplys", method=RequestMethod.POST, produces= "application/json;charset=UTF-8")
-	public Map<String,Object> getTopicReplys(Integer topicId,Integer pageNum){
+	@RequestMapping(value="/getTopicReplys", method=RequestMethod.POST,produces= "application/json;charset=UTF-8")
+	public Map<String,Object> getTopicReplys(Integer topicId, Integer pageNum){
 		Map<String,Object> msg = new HashMap<String, Object>();
+		if(topicId == null ){
+			msg.put("data", "缺少参数！");
+			msg.put("stauts", "error");
+			return msg;
+		}
+		pageNum = (pageNum == null)?1:pageNum;
+		
+		System.out.println("topicId:"+topicId+"\n"+"pageNum:"+pageNum);
 		Integer pageSize = 8;
 		PageInfo<TopicReply> replys = topicService.getTopicReplysByTopicId(topicId, pageNum, pageSize);
 		if(replys.getSize() <= 0 ){
@@ -157,6 +170,7 @@ public class IndexController {
 			msg.put("data", replys);
 			msg.put("stauts", "success");
 		}
+		System.out.println(msg);
 		return msg;	
 	}
 	

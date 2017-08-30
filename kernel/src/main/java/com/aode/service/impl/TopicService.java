@@ -13,6 +13,7 @@ import com.aode.dto.Like;
 import com.aode.dto.Topic;
 import com.aode.dto.TopicReply;
 import com.aode.service.ITopicService;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
@@ -55,6 +56,7 @@ public class TopicService implements ITopicService {
 	public PageInfo<TopicReply> getTopicReplysByTopicId(Integer topicId,int pageNum,int pageSize) {
 		PageHelper.startPage(pageNum,pageSize);
 		List<TopicReply> replys = topicMapper.getTopicReplysByTopicId(topicId);
+//		System.out.println(((Page<TopicReply>)replys).getResult().get(1));
 		PageInfo<TopicReply> page = new PageInfo<TopicReply>(replys);
 		return page;
 	}

@@ -40,7 +40,7 @@
 	</select>
 	
 	<select id="searchTopicOfTitleAndId" parameterType="java.lang.String" resultType="com.aode.dto.Topic">
-		SELECT topic_id,title,publishtime,likecount
+		SELECT topic_id,title,publishtime,likecount,replycount
 		FROM topic 
 		WHERE title
 		LIKE CONCAT("%",#{param},"%")

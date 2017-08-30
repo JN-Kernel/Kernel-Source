@@ -89,16 +89,6 @@ public class TopicReply {
 	public void setReplyToReplyId(Integer replyToReplyId) {
 		this.replyToReplyId = replyToReplyId;
 	}
-
-
-	public List<TopicReply> getChildReply() {
-		return childReplys;
-	}
-
-	public void setChildReply(List<TopicReply> childReplys) {
-		this.childReplys = childReplys;
-	}
-
 	
 	public List<TopicReply> getChildReplys() {
 		return childReplys;

@@ -8,8 +8,9 @@ $(function(){
 		$(window).attr('location',url);					
 	}else{
 		//获取数据
-		
+		alert($("#comments ol").attr("class"));
 		getTopic(param);
+		
 		
 	}
 	
@@ -69,7 +70,8 @@ function getTopic(param){
 				//Comments
 				$("#comments-title").text(topic.replycount+"条评论");
 				
-			}else{
+			}else{				
+				$(window).attr('location','index.html');
 				alert(data.data);
 			}
 		},
@@ -80,14 +82,18 @@ function getTopic(param){
 }
 
 //reply
-function getReplys(){
-	
+function getReplys(topicId,pageNum){
+	var postData = "topicId="+topicId+"&pageNum="+pageNum;
+	$.post("index/getTopicReplys.do",postData,function(data,stauts){
+		if(stauts == "success"){
+			alert(data);
+		}else{
+			$("#comments-title").text("暂时无法获取到评论信息！请稍后再试！");
+		}
+	});
 }
 
-//replyHandle
-function replysHandle(){
-	
-}
+
 
 //get url param
 function GetQueryString(name)
@@ -127,9 +133,9 @@ function isLiked(topicId){
 	});
 }
 
+//点赞
 function chickLike(event){
 	var topicId = event.data.topicId;
-	alert(topicId);
 	$.post("index/likeTopic.do","topicId="+topicId,function(data,stauts){
 		if(stauts == "success"){
 			if(data.stauts == "success"){
