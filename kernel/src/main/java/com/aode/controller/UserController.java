@@ -23,8 +23,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.aode.dto.TopicReply;
 import com.aode.dto.User;
 import com.aode.dto.Userinfo;
+import com.aode.service.ITopicService;
 import com.aode.service.IUserService;
 
 import com.aode.util.*;
@@ -39,6 +41,10 @@ public class UserController {
 	@Resource
 	private IUserService userService;
 
+	@Resource
+	private ITopicService topicService;
+
+	
 	/**
 	 * 用于注册时用户名/手机/邮箱的验证
 	 * 
@@ -337,5 +343,51 @@ public class UserController {
 			return null;
 		}
 		
+	}
+	
+	/**
+	 * 发表评论
+	 * @param reply
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/commentTopic", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
+	public Map<String, String> comment(HttpServletRequest request, TopicReply reply){
+		Map<String,String> msg = new HashMap<String, String>();
+		
+		User user = (User) request.getSession().getAttribute("user");
+		if(user == null){
+			msg.put("data", "请登录后再进行发表！");
+			msg.put("stauts", "error");
+			return msg;
+		}
+		if(reply == null || reply.getContent() == null || reply.getTopicId() == null ){
+			msg.put("data", "缺少参数！");
+			msg.put("stauts", "error");
+		}else{
+			if(reply.getReplyToUserId() == null){
+				Integer replyToUserId = topicService.getTopicByTopicId(reply.getTopicId()).getUserId();
+				if(replyToUserId == null){
+					msg.put("data", "数据异常!请重新发表！！！code:reply uid null");
+					msg.put("stauts", "error");
+					return msg;
+				}
+				reply.setReplyToUserId(replyToUserId);
+			}
+			
+			reply.setReplytime(new Date());
+			reply.setStatus(1); 	//保留
+			reply.setUserId(user.getUserId());
+			
+			boolean result = topicService.commentWithTopic(reply);
+			if(result){
+				msg.put("data", "发表成功！");
+				msg.put("stauts", "success");
+			}else{
+				msg.put("data", "发表时发生异常！请重新发表！");
+				msg.put("stauts", "error");	
+			}
+		}
+		return msg;
 	}
 }

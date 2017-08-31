@@ -116,4 +116,5 @@ public interface TopicMapper {
 	 */
 	public Integer getLikecountByTopicId(Integer topicId);
 	
+	public Integer saveTopicReply(TopicReply reply);
 }

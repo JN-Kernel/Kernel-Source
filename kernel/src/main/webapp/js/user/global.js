@@ -1,7 +1,10 @@
 $(document).ready(function(){
+
 	$.post("user/isLogined.do",function(data,stauts){
-		if(stauts == "success"){
+		if(stauts == "success"){	
 			if(data == "true"){
+				//topic.html
+				topic(true);
 				$.post("user/getUsername.do",function(data,stauts){
 					if(stauts == "success"){
 						$(".guest").remove();
@@ -16,15 +19,35 @@ $(document).ready(function(){
 								+'<li><a href="user/logout.do"><i class="glyphicon glyphicon-log-out"></i>退出</a></li>'
 								+'</ul>'
 						);
-						$("#userinfo").attr("userid",data.userId)
+						$("#userinfo").attr("userid",data.userId);
 					}
 					
 				});
 						
+			}else{
+				topic(false);
 			}
 		}else{
 			$("#userinfo").empty();
 		}
 	});
-	
 });
+
+
+//topic页面处理,flag为true时代表可以使用评论发表
+function topic(flag){
+	var url = window.location.pathname;
+	var reg = /\/topic.html/;
+	//判断是否为topic.html
+	if(reg.exec(url) != null){
+		if(!flag){	//未登录
+			$("textarea").attr("disabled","disabled");
+			$("textarea").text("请登陆后再发表您的评论!");
+			$("#submit").attr("disabled","disabled");
+		}else{
+			$("textarea").removeAttr("disabled");
+			$("textarea").text("");
+			$("#submit").removeAttr("disabled");
+		}
+	}
+}

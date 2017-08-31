@@ -56,4 +56,11 @@ public interface ITopicService {
 	 * @return
 	 */
 	public Boolean chickLike(Like like);
+	
+	/**
+	 * 评论帖子
+	 * @param reply
+	 * @return
+	 */
+	public Boolean commentWithTopic(TopicReply reply);
 }

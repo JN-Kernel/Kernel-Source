@@ -169,4 +169,10 @@
 		FROM topic 
 		WHERE topic_id=#{topicId}
 	</select>
+	
+	<insert id="saveTopicReply" parameterType="com.aode.dto.TopicReply">
+		INSERT INTO 
+		topic_reply(content,user_id,topic_id,replytime,status,reply_to_user_id,reply_to_reply_id)
+		VALUE (#{content},#{userId},#{topicId},#{replytime},#{status},#{replyToUserId},#{replyToReplyId})
+	</insert>
 </mapper>

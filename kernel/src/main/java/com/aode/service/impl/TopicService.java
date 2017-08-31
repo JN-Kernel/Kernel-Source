@@ -13,7 +13,6 @@ import com.aode.dto.Like;
 import com.aode.dto.Topic;
 import com.aode.dto.TopicReply;
 import com.aode.service.ITopicService;
-import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
@@ -76,6 +75,11 @@ public class TopicService implements ITopicService {
 			 TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
 			 return false;
 		}
+	}
+
+	@Override
+	public Boolean commentWithTopic(TopicReply reply) {
+		return topicMapper.saveTopicReply(reply) > 0;
 	}
 
 }
