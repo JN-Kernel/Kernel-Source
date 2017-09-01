@@ -39,6 +39,6 @@ public interface UserMapper {
 	// 根据用户名查找其权限
 	public Set<String> getPermissions(String username);
 	
-	public Userinfo getUserinfo(Integer userId);
+	public User getUserinfo(Integer userId);
 
 }

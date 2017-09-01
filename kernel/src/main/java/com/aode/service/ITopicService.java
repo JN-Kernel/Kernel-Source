@@ -2,6 +2,7 @@ package com.aode.service;
 
 import java.util.List;
 
+import com.aode.dto.Catorey;
 import com.aode.dto.Like;
 import com.aode.dto.Topic;
 import com.aode.dto.TopicReply;
@@ -63,4 +64,10 @@ public interface ITopicService {
 	 * @return
 	 */
 	public Boolean commentWithTopic(TopicReply reply);
+	
+	/**
+	 * 取出所有分类
+	 * @return
+	 */
+	public List<Catorey> getAllCatorey();
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.aode.dto.Catorey;
 import com.aode.dto.Like;
 import com.aode.dto.Topic;
 import com.aode.dto.TopicReply;
@@ -233,6 +234,29 @@ public class IndexController {
 		}else{
 			return likeStauts;
 		}
+	}
+	
+	/**
+	 * 取出所有分类
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getAllCatorey", method=RequestMethod.POST,produces="application/json;charset=UTF-8")
+	public Map<String, Object> getAllCatorey(){
+		Map<String,Object> msg = new HashMap<String, Object>();
+		List<Catorey> catorey =  topicService.getAllCatorey();
+		if(catorey != null && catorey.size() >0){
+			msg.put("data", catorey);
+			msg.put("stauts", "success");
+		}else if( catorey.size() == 0){
+			msg.put("data", "没有分类！！！");
+			msg.put("stauts", "error");
+		}else{
+			msg.put("data", "暂时获取不到分类信息！");
+			msg.put("stauts", "error");
+		}
+		
+		return msg;
 	}
 	
 }

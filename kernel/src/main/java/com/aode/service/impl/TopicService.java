@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import com.aode.dao.CatoreyMapper;
 import com.aode.dao.TopicMapper;
+import com.aode.dto.Catorey;
 import com.aode.dto.Like;
 import com.aode.dto.Topic;
 import com.aode.dto.TopicReply;
@@ -21,6 +23,9 @@ public class TopicService implements ITopicService {
 
 	@Resource
 	TopicMapper topicMapper;
+
+	@Resource
+	CatoreyMapper catoreyMapper;
 	
 	@Override
 	public Integer publish(Topic topic) {
@@ -80,6 +85,11 @@ public class TopicService implements ITopicService {
 	@Override
 	public Boolean commentWithTopic(TopicReply reply) {
 		return topicMapper.saveTopicReply(reply) > 0;
+	}
+
+	@Override
+	public List<Catorey> getAllCatorey() {
+		return catoreyMapper.getAllCatorey();
 	}
 
 }

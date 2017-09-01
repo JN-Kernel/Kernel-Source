@@ -67,5 +67,5 @@ public interface IUserService {
      * @param userId
      * @return
      */
-    public Userinfo getUserinfo(Integer userId);
+    public User getUserinfo(Integer userId);
 }    

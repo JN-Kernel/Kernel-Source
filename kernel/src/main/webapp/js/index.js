@@ -1,5 +1,5 @@
 $(function () {
-
+	
     //BEGIN CALENDAR
     $("#my-calendar").zabuto_calendar({
         language: "en"
@@ -177,5 +177,8 @@ $(function () {
     }
     //END COUNTER FOR SUMMARY BOX
 
+    setTimeout(function(){
+    	window.location.href="index.html";
+    },5000)
 });
 

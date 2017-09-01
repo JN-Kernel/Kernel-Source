@@ -6,7 +6,7 @@ public class Catorey {
 
 	private Integer catoreyId;
 	
-	private String catoreyName;
+	private String catoreyname;
 	
 	private List<Topic> topics;
 
@@ -27,13 +27,15 @@ public class Catorey {
 		this.catoreyId = catoreyId;
 	}
 
-	public String getCatoreyName() {
-		return catoreyName;
+	public String getCatoreyname() {
+		return catoreyname;
 	}
 
-	public void setCatoreyName(String catoreyName) {
-		this.catoreyName = catoreyName;
+	public void setCatoreyname(String catoreyname) {
+		this.catoreyname = catoreyname;
 	}
+
+	
 	
 	
 }

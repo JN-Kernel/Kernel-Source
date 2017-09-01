@@ -333,11 +333,15 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/getUserinfo", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
-	public Userinfo getUserinfo(HttpServletRequest request){
+	public User getUserinfo(HttpServletRequest request){
 		User user = (User) request.getSession().getAttribute("user");
 		if(user != null){
 			
-			return userService.getUserinfo(user.getUserId());
+			User userinfo = userService.getUserinfo(user.getUserId());
+			userinfo.setPassword(null);		//隐藏用户密码
+			String phone = user.getPhone();	//手机号处理
+			userinfo.setPhone(phone.substring(0, 3)+"******"+phone.substring(9));
+			return userinfo;
 			
 		}else{
 			return null;
