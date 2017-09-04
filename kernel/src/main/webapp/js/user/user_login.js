@@ -7,13 +7,13 @@ $("#submit").click(function() {
 		data : $("#loginfrom").serialize(),
 		dataType:"json",
 		success : function(data) {
-			
+			var url = (data.url == null || data.url == "")?"inde4x.html":data.url;
 			if(data.stauts == "401"){
 				alertbox.attr("class","alert alert-danger");
 			}else if(data.stauts == "200"){
 				alertbox.attr("class","alert alert-success");
 				 setTimeout(function () {
-					 $(window).attr('location',document.referrer);
+					 $(window).attr('location',url);
 				    }, 1500);
 			}else{
 				alertbox.attr("class","alert alert-warning");

@@ -55,18 +55,24 @@
 		
 		<!-- Shiro连接约束配置,即过滤链的定义 -->
 		<property name="filterChainDefinitions">
+			<!-- 优先原则，重复配置按最前为有效配置 -->
 			<value>
 				/login.do=anon
 				/user/logout.do=logout
 
-				/user/**=anon
+				/user*=user
+				
+				/user/changePassword.do=authc
+				/user/getUsername.do=user
+				/user/getUserinfo.do=user
+				/user/commentTopic.do=user
+				/user/updateUserinfo.do=user
+				
+				/user/**=anon,userSetting
+				
+				/index/likeTopic.do=user
 				/index/**=anon,userSetting
 				
-				/user*=anon
-				/user/admin*=authc
-				/user.html=user
-				/user/student*/**=roles[teacher]
-				/user/teacher*/**=perms["user:create"]
 				/admin=authc
 				
 			</value>

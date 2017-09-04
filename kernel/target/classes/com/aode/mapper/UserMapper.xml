@@ -124,13 +124,14 @@
 		WHERE username=#{username}
 	</update>
 
-	<update id="updateUser" parameterType="com.aode.dto.User">
-		UPDATE user
-		SET username=#{username},
-			password=#{password},
-			email=#{email},
-			phone=#{phone},
-			creattime=#{creattime}
+	<update id="updateUser" parameterType="com.aode.dto.Userinfo">
+		UPDATE userinfo
+		<set>
+			<if test="gender != null"> gender=#{gender},</if>
+			<if test="birthday != null"> birthday=#{birthday},</if>
+			<if test="address != null"> address=#{address},</if>
+		</set>	
+
 		WHERE user_id=#{userId}
 	</update>
 </mapper>

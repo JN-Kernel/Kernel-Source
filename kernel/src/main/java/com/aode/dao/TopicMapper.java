@@ -116,5 +116,17 @@ public interface TopicMapper {
 	 */
 	public Integer getLikecountByTopicId(Integer topicId);
 	
+	/**
+	 * 保存回复
+	 * @param reply
+	 * @return
+	 */
 	public Integer saveTopicReply(TopicReply reply);
+	
+	/**
+	 * 取出用户发表的topic
+	 * @param username
+	 * @return
+	 */
+	public List<Topic> getTopicListByUserId(Integer userId);
 }

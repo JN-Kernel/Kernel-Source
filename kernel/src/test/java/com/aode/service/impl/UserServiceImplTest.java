@@ -53,8 +53,8 @@ public class UserServiceImplTest {
 	@Test
 	public void testUpdateUserByUserId() {
 		fail("Not yet implemented");
-		Integer s = userService.updateUserByUserId(user);
-		System.out.println(s);
+//		Integer s = userService.updateUserByUserId(user);
+//		System.out.println(s);
 	}
 
 	@Test

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zn">
 <head>
-<title></title>
+<title>文章发表</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,7 +51,7 @@
 							href="#" class="dropdown-toggle"> <img
 								src="images/avatar/48.jpg" alt=""
 								class="img-responsive img-circle" />&nbsp;<span
-								class="hidden-xs">Robert John</span>&nbsp;<span class="caret"></span>
+								class="hidden-xs" id="username"></span>&nbsp;<span class="caret"></span>
 						</a>
 							<ul class="dropdown-menu dropdown-user pull-right">
 								<li><a href="user_info.html"><i
@@ -61,7 +61,7 @@
 								<li><a href="user.html"><i
 										class="glyphicon glyphicon-cloud"></i>已发表文章</a></li>
 								<li class="divider"></li>
-								<li><a href="Login.html"><i
+								<li><a href="user/logout.do"><i
 										class="glyphicon glyphicon-log-out"></i>退出</a></li>
 							</ul></li>
 
@@ -128,7 +128,7 @@
 											<div class="row">
 												<div class="col-xs-10">
 													<input type="text" placeholder="文章标题" class="form-control"
-														disbled />
+														id="topic-title" />
 												</div>
 											</div>
 										</div>
@@ -193,6 +193,7 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/bootstrap-hover-dropdown.js"></script>
 	<script src="js/index.js"></script>
+	<script src="js/private/common.js"></script>
 
 	<!-- ueditor -->
 	<!-- 配置文件 -->
@@ -206,7 +207,6 @@
 	
 	<!-- 页面处理 -->
 	<script type="text/javascript" src="js/private/publish.js"></script>
-
 
 
 </body>

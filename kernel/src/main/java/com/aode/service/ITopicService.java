@@ -70,4 +70,11 @@ public interface ITopicService {
 	 * @return
 	 */
 	public List<Catorey> getAllCatorey();
+	
+	/**
+	 * 取得用户发表的文章
+	 * @param userId
+	 * @return
+	 */
+	public  PageInfo<Topic> getUserTopicList(Integer userId,Integer pageNum,Integer pageSize);
 }

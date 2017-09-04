@@ -39,8 +39,8 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public Integer updateUserByUserId(User user) {
-		return userMapper.updateUser(user);
+	public Integer updateUserByUserId(Userinfo userinfo) {
+		return userMapper.updateUser(userinfo);
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class UserServiceImpl implements IUserService {
 		}else{
 			throw new Exception("用户不存在");
 		}
-		return userMapper.changePassword(username, newPassword);
+		return userMapper.changePassword(user);
 	}
 
 	@Override

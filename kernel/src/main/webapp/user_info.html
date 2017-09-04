@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zn">
 <head>
-<title></title>
+<title>我的信息</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,10 +11,12 @@
 
 <link rel="shortcut icon" href="images/icons/favicon.ico">
 <!--Loading bootstrap css-->
+<!-- 
 <link type="text/css" rel="stylesheet"
 	href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
 <link type="text/css" rel="stylesheet"
 	href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
+ -->
 <link type="text/css" rel="stylesheet"
 	href="css/styles/font-awesome.min.css">
 <link type="text/css" rel="stylesheet" href="css/user/bootstrap.min.css">
@@ -25,6 +27,7 @@
 	rel="stylesheet">
 <link rel="stylesheet" href="css/cropper/cropper.min.css" />
 <link rel="stylesheet" href="css/cropper/main.css" />
+<link rel="stylesheet" href="css/user/animate.css" />
 
 </head>
 <body>
@@ -58,7 +61,7 @@
 							href="#" class="dropdown-toggle"> <img
 								src="images/avatar/48.jpg" alt=""
 								class="img-responsive img-circle" />&nbsp;<span
-								class="hidden-xs">Robert John</span>&nbsp;<span class="caret"></span>
+								class="hidden-xs" id="username"></span>&nbsp;<span class="caret"></span>
 						</a>
 							<ul class="dropdown-menu dropdown-user pull-right">
 								<li><a href="user_info.html"><i
@@ -68,7 +71,7 @@
 								<li><a href="user.html"><i
 										class="glyphicon glyphicon-cloud"></i>已发表文章</a></li>
 								<li class="divider"></li>
-								<li><a href="Login.html"><i
+								<li><a href="user/logout.do"><i
 										class="glyphicon glyphicon-log-out"></i>退出</a></li>
 							</ul></li>
 
@@ -127,6 +130,7 @@
 			<!--END TITLE & BREADCRUMB PAGE-->
 			<!--BEGIN CONTENT-->
 			<div class="page-content">
+			
 				<div id="tab-general">
 					<div class="row mbl">
 						<div class="col-lg-12">
@@ -236,7 +240,7 @@
 										<div class="col-md-9">
 											<div id="generalTabContent" class="tab-content">
 												<div id="tab-edit" class="tab-pane fade in active">
-													<form action="#" class="form-horizontal">
+													<form id="userinfo-form" class="form-horizontal">
 
 														<h3>用户信息</h3>
 
@@ -260,7 +264,7 @@
 																	<div class="col-xs-9">
 																		<div class="radio">
 																			<label class="radio-inline"> <input
-																				type="radio" id="" value="0" name="gender"
+																				type="radio" id="gender-boy" value="0" name="gender"
 																				checked="checked" />&nbsp;男孩纸
 																			</label> <label class="radio-inline"> <input
 																				type="radio" id="gender-girl" value="1"
@@ -296,7 +300,8 @@
 															</div>
 														</div>
 														<hr />
-														<button type="submit" class="btn btn-green btn-block">Finish</button>
+														<button id="userinfo_submit" type="button"
+															class="btn btn-green btn-block">Finish</button>
 													</form>
 												</div>
 											</div>
@@ -309,8 +314,27 @@
 				</div>
 			</div>
 		</div>
-
-
+		<!-- 提示框 -->
+		<div class="modal bs-example-modal-lg"
+			onclick="modalHide('#bigModal', '');" id="bigModal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" onclick="modalHide('#bigModal', '');"
+							class="close" data-dismiss="modal">
+							<span aria-hidden="true"> × </span> <span class="sr-only">
+								Close </span>
+						</button>
+						<h4 id="alert-title" class="modal-title">模态框标题</h4>
+					</div>
+					<div id="alert-body" class="modal-body"></div>
+					<button id="alert-submit" type="button" class="btn btn-primary btn-block">
+						确定
+					</button>
+				</div>
+			</div>
+		</div>
+		<!-- 提示框end -->
 		<!--BEGIN FOOTER-->
 		<div id="footer">
 			<div class="copyright">
@@ -332,25 +356,25 @@
 	<script src="js/datetime/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 	<script src="js/cropper/cropper.min.js"></script>
 	<script src="js/cropper/main.js"></script>
+	<script src="js/user/animate.js"></script>
 	<script src="js/private/common-userinfo.js"></script>
 	<script src="js/private/account.js"></script>
-	<script type="text/javascript">
-		$('.form_date').datetimepicker({
-			language : 'zh-CN',
-			format : 'yyyy-mm-dd',
-			weekStart : 1,
-			todayBtn : 1,
-			autoclose : 1,
-			todayHighlight : 1,
-			startView : 2,
-			minView : 2,
-			forceParse : 0
-		});
-
-		$('.container > img').cropper({
-			aspectRatio : 4 / 3,
-		});
+	<script src="js/private/common.js"></script>
+	<script>
+	//日期插件
+	$('.form_date').datetimepicker({
+		language : 'zh-CN',
+		format : 'yyyy-mm-dd',
+		weekStart : 1,
+		todayBtn : 1,
+		autoclose : 1,
+		todayHighlight : 1,
+		startView : 2,
+		minView : 2,
+		forceParse : 0
+	});
 	</script>
+
 </body>
 
 

@@ -27,18 +27,14 @@ public class TopicService implements ITopicService {
 	@Resource
 	CatoreyMapper catoreyMapper;
 	
-	@Override
-	public Integer publish(Topic topic) {
-		return topicMapper.saveTopic(topic);
-	}
 
 	@Transactional
 	@Override
 	public Integer save(Topic topic) {
-		topicMapper.saveTopic(topic);
+		Integer saveTopic = topicMapper.saveTopic(topic);
 		topic.getTopicContent().setTopicId(topic.getTopicId());
-		topicMapper.saveTopicContent(topic.getTopicContent());
-		return 1;
+		Integer saveContent = topicMapper.saveTopicContent(topic.getTopicContent());
+		return (saveTopic >0 && saveContent >0) ? 1:0;
 	}
 
 	@Override
@@ -90,6 +86,19 @@ public class TopicService implements ITopicService {
 	@Override
 	public List<Catorey> getAllCatorey() {
 		return catoreyMapper.getAllCatorey();
+	}
+
+	@Override
+	public PageInfo<Topic> getUserTopicList(Integer userId,Integer pageNum,Integer pageSize) {
+		PageHelper.startPage(pageNum,pageSize);
+		List<Topic> topicList = topicMapper.getTopicListByUserId(userId);
+		PageInfo<Topic> page = new PageInfo<Topic>(topicList);
+		return page;
+	}
+
+	@Override
+	public Integer publish(Topic topic) {
+		return save(topic);
 	}
 
 }

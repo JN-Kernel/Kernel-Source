@@ -1,4 +1,4 @@
-function getUserInfo(flag){	
+function getUserInfo(){	
 	var result = null;
 	var msg = "init";
 	 $.ajax({
@@ -6,13 +6,16 @@ function getUserInfo(flag){
 		  type: "POST",
 		  async: false,	//同步
 		  success:function(data){
-				msg = "success";
-				result = data;	
+				if(data != null && data != ""){
+					msg = "success";
+					result = data;						
+				}else{
+					msg = "nodata";
+				}
 		  },
 		  error:function(){
 			  msg = "error";
 		  }
 		}); 
 	 return [msg,result];
-
 }

@@ -175,4 +175,11 @@
 		topic_reply(content,user_id,topic_id,replytime,status,reply_to_user_id,reply_to_reply_id)
 		VALUE (#{content},#{userId},#{topicId},#{replytime},#{status},#{replyToUserId},#{replyToReplyId})
 	</insert>
+	
+	<select id="getTopicListByUserId" parameterType="java.lang.Integer" resultType="com.aode.dto.Topic">
+		SELECT topic_id,title,publishtime,likecount,replycount
+		FROM topic 
+		WHERE user_id=#{userId}
+		ORDER BY publishtime DESC 
+	</select>
 </mapper>

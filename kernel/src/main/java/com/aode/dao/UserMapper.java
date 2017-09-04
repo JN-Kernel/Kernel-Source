@@ -23,9 +23,9 @@ public interface UserMapper {
 
 	public Integer deleteByUserId(Integer userId);
 
-	public Integer updateUser(User user);
+	public Integer updateUser(Userinfo userinfo);
 
-	public Integer changePassword(String username, String newPassword);
+	public Integer changePassword(User user);
 
 	// 添加用户-角色关系
 	public Integer correlationRoles(UserRole userRole); 

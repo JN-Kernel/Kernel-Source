@@ -19,7 +19,7 @@ public interface IUserService {
      * @param user
      * @return
      */
-    public Integer updateUserByUserId(User user);
+    public Integer updateUserByUserId(Userinfo userinfo);
     
     /**
      * 通过username获取用户

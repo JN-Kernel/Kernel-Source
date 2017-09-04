@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zn">
 <head>
-<title></title>
+<title>账户管理</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,10 +11,12 @@
 
 <link rel="shortcut icon" href="images/icons/favicon.ico">
 <!--Loading bootstrap css-->
+<!--  
 <link type="text/css" rel="stylesheet"
 	href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
 <link type="text/css" rel="stylesheet"
 	href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
+-->
 <link type="text/css" rel="stylesheet"
 	href="css/styles/font-awesome.min.css">
 <link type="text/css" rel="stylesheet" href="css/user/bootstrap.min.css">
@@ -56,7 +58,7 @@
 							href="#" class="dropdown-toggle"> <img
 								src="images/avatar/48.jpg" alt=""
 								class="img-responsive img-circle" />&nbsp;<span
-								class="hidden-xs">Robert John</span>&nbsp;<span class="caret"></span>
+								class="hidden-xs" id="username"></span>&nbsp;<span class="caret"></span>
 						</a>
 							<ul class="dropdown-menu dropdown-user pull-right">
 								<li><a href="user_info.html"><i
@@ -66,7 +68,7 @@
 								<li><a href="user.html"><i
 										class="glyphicon glyphicon-cloud"></i>已发表文章</a></li>
 								<li class="divider"></li>
-								<li><a href="Login.html"><i
+								<li><a href="user/logout.do"><i
 										class="glyphicon glyphicon-log-out"></i>退出</a></li>
 							</ul></li>
 
@@ -223,7 +225,7 @@
 											</table>
 										</div>
 										<div class="col-md-9">
-											
+
 											<div id="generalTabContent" class="tab-content">
 												<div id="tab-edit" class="tab-pane fade in active">
 													<form id="editAccount" class="form-horizontal">
@@ -235,8 +237,8 @@
 															<div class="col-sm-9 controls">
 																<div class="row">
 																	<div class="col-xs-4">
-																		<input type="password" placeholder="password"
-																			class="form-control" />
+																		<input id="old-pw" type="password"
+																			placeholder="password" class="form-control" />
 																	</div>
 																</div>
 															</div>
@@ -247,8 +249,8 @@
 															<div class="col-sm-9 controls">
 																<div class="row">
 																	<div class="col-xs-4">
-																		<input type="password" placeholder="password"
-																			class="form-control" />
+																		<input id="new-pw" type="password"
+																			placeholder="password" class="form-control" />
 																	</div>
 																</div>
 															</div>
@@ -259,15 +261,16 @@
 															<div class="col-sm-9 controls">
 																<div class="row">
 																	<div class="col-xs-4">
-																		<input type="password" placeholder="password"
-																			class="form-control" />
+																		<input id="re-pw" type="password"
+																			placeholder="password" class="form-control" />
 																	</div>
 																</div>
 															</div>
 														</div>
 
 														<hr />
-														<button type="submit" class="btn btn-green btn-block">Finish</button>
+														<button id="account-submit" type="button"
+															class="btn btn-green btn-block">Finish</button>
 													</form>
 												</div>
 											</div>
@@ -281,7 +284,26 @@
 			</div>
 		</div>
 
-
+		<!-- 提示框 -->
+		<div class="modal bs-example-modal-lg"
+			onclick="modalHide('#bigModal', '');" id="bigModal">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" onclick="modalHide('#bigModal', '');"
+							class="close" data-dismiss="modal">
+							<span aria-hidden="true"> × </span> <span class="sr-only">
+								Close </span>
+						</button>
+						<h4 id="alert-title" class="modal-title">模态框标题</h4>
+					</div>
+					<div id="alert-body" class="modal-body"></div>
+					<button id="alert-submit" type="button"
+						class="btn btn-primary btn-block">确定</button>
+				</div>
+			</div>
+		</div>
+		<!-- 提示框end -->
 
 		<!--BEGIN FOOTER-->
 		<div id="footer">
@@ -301,6 +323,8 @@
 	<script src="js/index.js"></script>
 	<script src="js/cropper/cropper.min.js"></script>
 	<script src="js/cropper/main.js"></script>
+	<script src="js/user/animate.js"></script>
+	<script src="js/private/common.js"></script>
 	<script src="js/private/common-userinfo.js"></script>
 	<script src="js/private/account.js"></script>
 </body>

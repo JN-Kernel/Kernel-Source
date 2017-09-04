@@ -259,4 +259,32 @@ public class IndexController {
 		return msg;
 	}
 	
+	
+	/**
+	 * 取出用户文章列表
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getUserTopicList", method=RequestMethod.POST,produces="application/json;charset=UTF-8")
+	public Map<String, Object> getUserTopicList(Integer userId,Integer pageNum){
+		Map<String,Object> msg = new HashMap<String, Object>();
+		if(userId == null || userId.equals("")){
+			msg.put("data", "参数错误！");
+			msg.put("stauts", "error");
+			return msg;
+		}
+		Integer pageSize = 10;
+		pageNum = (pageNum == null)?1:pageNum;
+		PageInfo<Topic> topic =  topicService.getUserTopicList(userId,pageNum,pageSize);
+		if(topic.getList() != null || topic.getList().size() >0){
+			msg.put("data", topic);
+			msg.put("stauts", "success");
+		}else{
+			msg.put("data", "您还未发表文章！");
+			msg.put("stauts", "error");
+		}
+		
+		return msg;
+	}
+	
 }
