@@ -121,13 +121,13 @@
 			<version>1.2.2</version>
 		</dependency>
 		<!-- mybatis框架包 end -->
-		<!-- mybatis分页插件 start-->
+		<!-- mybatis分页插件 start -->
 		<dependency>
 			<groupId>com.github.pagehelper</groupId>
 			<artifactId>pagehelper</artifactId>
 			<version>5.0.4</version>
 		</dependency>
-		<!-- mybatis分页插件 end-->
+		<!-- mybatis分页插件 end -->
 		<!-- 数据库驱动 -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -217,6 +217,18 @@
 			<groupId>org.apache.shiro</groupId>
 			<artifactId>shiro-spring</artifactId>
 			<version>1.2.5</version>
+		</dependency>
+
+		<!-- ueditor -->
+		<dependency>
+			<groupId>com.baidu</groupId>
+			<artifactId>ueditor</artifactId>
+			<version>1.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20140107</version>
 		</dependency>
 
 	</dependencies>

@@ -36,6 +36,7 @@ import com.aode.service.IUserService;
 import com.aode.util.*;
 import com.aode.util.sms.IndustrySMS;
 import com.aode.util.sms.SmsJsonVo;
+import com.baidu.ueditor.ActionEnter;
 
 @Controller
 @RequestMapping("/user")
@@ -479,6 +480,7 @@ public class UserController {
 		if(user == null){
 			msg.put("data", "请重新登陆后再发表文章！");
 			msg.put("stauts", "error");
+			return msg;
 		}
 		if(title == null || catoreyId == null || content == null || "".equals(catoreyId) || "".equals(title) || "".equals(content)){
 			msg.put("data", "参数错误！");
@@ -510,6 +512,41 @@ public class UserController {
 		return msg;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/delete", method=RequestMethod.POST,produces="application/json;charset=UTF-8")
+	public Map<String, Object> delete(HttpServletRequest request, Integer topicId){
+		Map<String, Object> msg = new HashMap<String, Object>();
+		User user = (User) request.getSession().getAttribute("user");
+		if(user == null){
+			msg.put("data", "请重新登陆后再发表文章！");
+			msg.put("stauts", "error");
+			return msg;
+		}
+		if(topicId == null  || "".equals(topicId)){
+			msg.put("data", "参数错误！");
+			msg.put("stauts", "error");
+		}else{
+			Topic topic = topicService.getTopicByTopicId(topicId);
+			if(!user.getUserId().equals(topic.getUserId())){
+				msg.put("data", "非法操作！");
+				msg.put("stauts", "error");
+				return msg;
+			}else{
+				Integer result = topicService.deleteByTopicId(topicId);
+				if(result >0){
+					msg.put("data", "删除成功！");
+					msg.put("stauts", "success");
+				}else{
+					msg.put("data", "删除失败！");
+					msg.put("stauts", "error");
+				}
+			}
+			
+			
+			
+		}
+		return msg;
+	}
 	/** 
      * 用于处理Date类型参数处理
      * @return 

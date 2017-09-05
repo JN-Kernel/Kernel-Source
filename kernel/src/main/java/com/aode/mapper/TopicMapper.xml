@@ -177,7 +177,7 @@
 	</insert>
 	
 	<select id="getTopicListByUserId" parameterType="java.lang.Integer" resultType="com.aode.dto.Topic">
-		SELECT topic_id,title,publishtime,likecount,replycount
+		SELECT topic_id,title,publishtime,likecount,replycount,catorey_id
 		FROM topic 
 		WHERE user_id=#{userId}
 		ORDER BY publishtime DESC 

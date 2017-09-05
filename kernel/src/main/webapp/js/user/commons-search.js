@@ -14,6 +14,12 @@ $(function(){
 		}
 	});
 	
+	
+	//更多
+	$("#more").click(function() {		
+			getAll("1");
+	});
+	
 	//自定义回车提交
 	$('#search').keypress(function(e){
         if(e.keyCode==13){
@@ -102,4 +108,27 @@ function dataPadding(data) {
 }
 
 
-
+function getAll(pageNum){
+	$.ajax({
+		type : "GET",
+		url : "index/getTopicList.do",
+		data : "pageNum="+pageNum,
+		dataType : "json",
+		success : function(data, stauts) {
+			if (stauts == "success") {
+				if (data == null || data == "") {
+					$("#searchAlert").text("暂时获取不到数据，请稍后再试！");
+				} else {
+					$("#showPlane").empty(); // 清空原有内容
+					dataPadding(data.list);
+					pagination(data);
+				}
+			} else {
+				$("#searchAlert").text("暂时获取不到数据，请稍后再试！");
+			}
+		},
+		error : function() {
+			$("#searchAlert").text("获取数据时发生错误！");
+		},
+	});
+}

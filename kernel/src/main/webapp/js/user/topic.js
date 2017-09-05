@@ -47,7 +47,7 @@ function getTopic(param){
 				
 				$("#topic_info").children("span.category").html('<a href="#替换"'
 								+'title="查看所有'+catoreyname+'分类">'+catoreyname+'</a>');
-				$("#topic_info").children("span.comments").html('<a href="#" '
+				$("#topic_info").children("span.comments").html('<a href="#commentlist-plane" '
 								+'title="有'+topic.replycount+'条评论">'+topic.replycount
 								+'条评论</a>');
 				$("#topic_info").children("span.like-count").text(topic.likecount);
@@ -65,7 +65,7 @@ function getTopic(param){
 				getReplys(param,it);
 				
 				//comment topic
-				$("#submit").click(comment);
+				$("#submit").on("click",{param},comment);
 				
 			}else{				
 				$(window).attr('location','index.html');
@@ -100,6 +100,8 @@ function replysHandle(data){
 	if(data == null || data == ""){
 		$("#comments-title").text("获取评论时发生错误！请刷新重试！");
 	}else{
+		//初始化评论区
+		$("#commentlist-plane").remove();
 		//创建评论区
 		$("#comments-title").after('<ol class="commentlist" id="commentlist-plane">');
 		var $plane = $("#commentlist-plane");
@@ -171,7 +173,7 @@ function isLiked(topicId){
 	$.post("index/getLikeStauts.do","topicId="+topicId,function(data,stauts){
 		
 		if(stauts == "success"){
-			if(data.stauts == "info"){
+			if(data.stauts == "success"){
 				$("#likeBtn").attr("class","like-it");
 				// 绑定点赞
 				$("#likeBtn").on("click",{topicId},chickLike);
@@ -203,6 +205,7 @@ function chickLike(event){
 		if(stauts == "success"){
 			if(data.stauts == "success"){
 				$("#likeBtn").attr("class","like-it");
+				isLiked(topicId);
 			}else{
 				$("#likeBtn").attr("class","like-no");
 			}
@@ -216,17 +219,19 @@ function chickLike(event){
 }
 
 
-function comment(){
-	var content = $("#comment").text();
-	alert(content);
+function comment(event){
+	var content = $("#comment").val();
+	var param = event.data.param;
+//	alert(param);
 	if(content == null || content == ""){
 		$("#comment-lable").text("请输入您的评论再发表！");
 	}else{
-		var postData = "";
+		var postData = {"topicId":param,"content":content};
 		$.post("user/commentTopic.do",postData,function(data,stauts){
 			if(stauts == "success"){
 				if(data.stauts == "success"){
 					$("#comment").text("");
+					getReplys(param,"1");
 				}
 				$("#comment-lable").text(data.data);
 			}else{

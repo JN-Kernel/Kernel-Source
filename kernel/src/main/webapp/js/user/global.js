@@ -8,7 +8,7 @@ $(document).ready(function(){
 				$.post("user/getUsername.do",function(data,stauts){
 					if(stauts == "success"){
 						$(".guest").remove();
-						$("#userinfo").html('<a href="#">'
+						$("#userinfo").html('<a href="user_info.html">'
 								+data.username
 								+'</a>'
 								+'<ul class="sub-menu">'

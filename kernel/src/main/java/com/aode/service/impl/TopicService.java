@@ -67,6 +67,7 @@ public class TopicService implements ITopicService {
 		Integer resultFirst = topicMapper.chickLike(like);
 		Integer likeCount = topicMapper.getLikecountByTopicId(like.getTopicId());
 		Topic topic = new Topic();
+		topic.setTopicId(like.getTopicId());
 		topic.setLikecount(likeCount+1);
 		Integer resultSecond = topicMapper.updateTopicByTopicId(topic);
 		if(resultFirst > 0 && resultSecond > 0 ){
@@ -78,9 +79,16 @@ public class TopicService implements ITopicService {
 		}
 	}
 
+	@Transactional
 	@Override
 	public Boolean commentWithTopic(TopicReply reply) {
-		return topicMapper.saveTopicReply(reply) > 0;
+		
+		Integer saveReply = topicMapper.saveTopicReply(reply);
+		Topic topic = topicMapper.getTopicById(reply.getTopicId());
+		topic.setReplycount(topic.getReplycount()+1);
+		Integer saveCount = topicMapper.updateTopicByTopicId(topic);
+		
+		return (saveReply >0 && saveCount > 0);
 	}
 
 	@Override
